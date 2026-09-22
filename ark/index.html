@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adzan Ready Kids | Sistem Pemicu Sholat 21 Hari untuk Anak 7 sampai 12 Tahun</title>
+<meta name="description" content="Aplikasi yang memasang sistem pemicu sholat di rumah selama 21 hari, supaya anak 7 sampai 12 tahun berdiri sholat saat adzan tanpa harus diteriakin.">
+<meta property="og:title" content="Adzan Ready Kids | Sistem Pemicu Sholat 21 Hari untuk Anak 7 sampai 12 Tahun">
+<meta property="og:description" content="Aplikasi yang memasang sistem pemicu sholat di rumah selama 21 hari, supaya anak 7 sampai 12 tahun berdiri sholat saat adzan tanpa harus diteriakin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0F5C50;
+  --teal-deep:#0B463D;
+  --teal-mid:#1D7A6B;
+  --teal-soft:#E7F2EF;
+  --amber:#E0A526;
+  --amber-deep:#B9851C;
+  --amber-soft:#FCF3DF;
+  --amber-ink:#12332D;
+  --green:#2F7A54;
+  --green-soft:#E9F3ED;
+  --red:#C8412F;
+  --bg:#F4F7F6;
+  --card:#FFFFFF;
+  --line:#E0E8E5;
+  --line-soft:#EBF0EE;
+  --ink:#15302B;
+  --muted:#52665F;
+  --muted-light:#81958E;
+  --radius:14px;
+  --radius-lg:20px;
+  --maxw:1120px;
+  --maxw-text:680px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.65;overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;}
+h1,h2,h3,h4{margin:0;line-height:1.22;letter-spacing:-0.02em;font-weight:800;color:var(--teal);}
+h1{font-size:clamp(27px,5.4vw,44px);}
+h2{font-size:clamp(23px,4vw,34px);}
+h3{font-size:clamp(19px,2.6vw,24px);}
+h4{font-size:17px;font-weight:700;}
+p{margin:0 0 1rem;}
+p:last-child{margin-bottom:0;}
+strong{font-weight:700;color:var(--teal);}
+
+/* layout */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+.narrow{max-width:var(--maxw-text);margin-left:auto;margin-right:auto;}
+section{padding:56px 0;}
+@media(min-width:768px){section{padding:76px 0;}}
+.sec-alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.sec-deep{background:var(--teal-deep);color:#fff;}
+.sec-deep h2,.sec-deep h3{color:#fff;}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--teal-mid);margin:0 0 10px;}
+.eyebrow-amber{color:var(--amber-deep);}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--muted);}
+.sec-deep .lead{color:#C5DDD7;}
+.center{text-align:center;}
+
+/* header */
+.site-head{background:var(--card);border-bottom:1px solid var(--line);padding:14px 0;position:relative;z-index:5;}
+.logo{font-size:19px;font-weight:800;letter-spacing:-0.03em;color:var(--teal);}
+.logo em{font-style:normal;color:var(--amber);}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--amber);color:var(--amber-ink);text-decoration:none;
+  font-weight:800;font-size:17px;letter-spacing:-0.01em;
+  padding:17px 28px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 2px 0 var(--amber-deep);
+  transition:transform .12s ease,box-shadow .12s ease;
+  text-align:center;width:100%;
+}
+@media(min-width:560px){.btn{width:auto;font-size:18px;padding:18px 34px;}}
+.btn:hover{transform:translateY(-1px);box-shadow:0 3px 0 var(--amber-deep);}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--amber-deep);}
+.btn:focus-visible{outline:3px solid var(--teal);outline-offset:3px;}
+.sec-deep .btn:focus-visible{outline-color:#fff;}
+.btn-note{font-size:14.5px;color:var(--muted);margin-top:12px;}
+.sec-deep .btn-note{color:#B3D0C9;}
+.cta-block{margin-top:26px;}
+
+/* hero */
+.hero{background:var(--card);padding:28px 0 44px;border-bottom:1px solid var(--line);}
+.hero-grid{display:block;}
+.hero-img{margin:22px -20px 24px;}
+@media(min-width:900px){
+  .hero{padding:64px 0 72px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1fr 460px;
+    grid-template-areas:"hd img" "rest img";
+    column-gap:56px;align-items:center;
+  }
+  .hero-hd{grid-area:hd;align-self:end;}
+  .hero-rest{grid-area:rest;align-self:start;padding-top:18px;}
+  .hero-img{grid-area:img;margin:0;align-self:center;}
+  .hero-img img{border-radius:var(--radius-lg);}
+}
+.hero-bullets{list-style:none;padding:0;margin:22px 0 0;}
+.hero-bullets li{position:relative;padding-left:30px;margin-bottom:12px;font-size:16.5px;color:var(--ink);}
+.hero-bullets li::before{
+  content:"";position:absolute;left:0;top:9px;width:16px;height:16px;border-radius:50%;
+  background:var(--green-soft);border:2px solid var(--green);
+}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:20px;font-size:14.5px;color:var(--muted);font-weight:600;}
+.hero-facts span{white-space:nowrap;}
+
+/* cards */
+.grid{display:grid;gap:18px;}
+@media(min-width:760px){.grid-3{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:640px){.grid-2{grid-template-columns:repeat(2,1fr);}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+.sec-alt .card{background:var(--bg);}
+.card-quote{font-size:18px;font-weight:800;color:var(--teal);margin:0 0 10px;line-height:1.35;}
+.card p{font-size:16px;color:var(--muted);}
+
+/* pemicu */
+.pemicu{border-left:4px solid var(--teal-mid);padding:4px 0 4px 18px;margin-bottom:20px;}
+.pemicu:nth-child(2){border-color:var(--amber);}
+.pemicu:nth-child(3){border-color:var(--green);}
+.pemicu:nth-child(4){border-color:var(--teal-deep);}
+.pemicu:nth-child(5){border-color:var(--amber-deep);}
+.pemicu h4{margin-bottom:4px;}
+.pemicu p{font-size:16px;color:var(--muted);margin:0;}
+
+/* steps */
+.step{display:grid;gap:20px;padding:28px 0;border-top:1px solid var(--line);}
+.step:first-of-type{border-top:none;}
+@media(min-width:800px){
+  .step{grid-template-columns:1fr 280px;gap:48px;align-items:center;}
+  .step.dimg{grid-template-columns:1fr 1.35fr;}
+  .step-img{order:2;}
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--teal);color:#fff;font-weight:800;font-size:16px;margin-bottom:12px;
+}
+.step-copy p{color:var(--muted);margin-top:10px;}
+.step-wide{display:block;}
+.step-wide .step-copy{max-width:var(--maxw-text);}
+.step-wide .step-img{margin-top:24px;}
+@media(min-width:800px){.step-wide .shot-m{max-width:980px;}}
+
+/* screenshot frames */
+.shot{border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:0 1px 3px rgba(15,92,80,.06);}
+.shot-m{max-width:320px;margin-left:auto;margin-right:auto;}
+.shot-r{max-width:320px;width:100%;margin-left:auto;margin-right:auto;}
+@media(min-width:860px){.shot-r{max-width:100%;}}
+@media(min-width:800px){.step .shot-r{max-width:100%;}}
+.shot-d{max-width:980px;margin-left:auto;margin-right:auto;}
+[data-zoom]{cursor:zoom-in;}
+.m-only{display:inline;}
+@media(min-width:700px){.m-only{display:none;}}
+.zoom-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+@media(min-width:860px){.zoom-note{display:none;}}
+figure{margin:0;}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;text-align:center;}
+
+/* feature rows */
+.feat{display:grid;gap:24px;padding:40px 0;border-top:1px solid var(--line);}
+@media(min-width:860px){
+  .feat{grid-template-columns:1fr 340px;gap:56px;align-items:center;}
+  .feat-img{order:2;}
+  .feat.flip{grid-template-columns:340px 1fr;}
+  .feat.flip .feat-img{order:1;}
+  .feat.flip .feat-copy{order:2;}
+  .feat.land{grid-template-columns:1fr 500px;}
+  .feat.dimg{grid-template-columns:1fr 1.35fr;}
+  .feat.dimg.flip{grid-template-columns:1.35fr 1fr;}
+}
+.feat-copy h3{margin-bottom:12px;}
+.feat-copy p{color:var(--muted);font-size:16.5px;}
+.feat-block{padding:40px 0;border-top:1px solid var(--line);}
+.feat-block .feat-copy{max-width:var(--maxw-text);}
+.feat-block .media{margin-top:26px;}
+
+/* duo: dua screenshot portrait */
+.duo{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.duo::-webkit-scrollbar{display:none;}
+.duo figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:700px){
+  .duo{display:grid;grid-template-columns:repeat(2,320px);justify-content:center;gap:28px;overflow:visible;padding:0;margin:0;}
+  .duo figure{max-width:none;}
+}
+@media(min-width:860px){
+  .duo{grid-template-columns:1fr 1fr;gap:24px;}
+  .duo-note{display:none;}
+}
+.duo-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+
+/* mix: satu screenshot lebar + satu portrait */
+.mix{display:grid;gap:22px;}
+.mix .m-port{max-width:320px;width:100%;margin:0 auto;}
+@media(min-width:860px){
+  .mix{grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+  .mix.rev{grid-template-columns:1fr 1fr;}
+  .mix .m-port{max-width:none;}
+  .mix.rev .m-wide{order:2;}
+  .mix.rev .m-port{order:1;}
+}
+
+/* timeline */
+.tl{list-style:none;padding:0;margin:0;}
+.tl li{position:relative;padding:0 0 26px 30px;border-left:2px solid rgba(255,255,255,.22);}
+.tl li:last-child{border-left-color:transparent;padding-bottom:0;}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--amber);}
+.tl strong{display:block;color:#fff;font-size:15px;letter-spacing:.02em;margin-bottom:3px;}
+.tl p{color:#C5DDD7;font-size:16.5px;margin:0;}
+
+/* fit lists */
+.fitlist{list-style:none;padding:0;margin:0;}
+.fitlist li{position:relative;padding-left:30px;margin-bottom:13px;font-size:16.5px;}
+.fitlist li::before{position:absolute;left:0;top:0;font-weight:800;font-size:17px;}
+.fit-yes li::before{content:"✓";color:var(--green);}
+.fit-no li::before{content:"✕";color:var(--red);}
+
+/* table */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:15.5px;background:var(--card);}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+thead th{font-size:13px;font-weight:700;color:var(--muted);border-bottom:2px solid var(--line);}
+thead th.hl{color:var(--teal);}
+tbody td.hl{font-weight:700;color:var(--teal);background:var(--teal-soft);}
+tbody th{font-weight:600;color:var(--ink);width:26%;}
+
+/* testimoni */
+.testi-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.testi-grid::-webkit-scrollbar{display:none;}
+.testi-grid img{flex:0 0 78%;scroll-snap-align:center;}
+.testi-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+.testi-dots button{width:8px;height:8px;padding:0;border:none;border-radius:50%;background:var(--line);cursor:pointer;transition:background .2s ease,width .2s ease;}
+.testi-dots button.on{background:var(--teal);width:22px;border-radius:5px;}
+.testi-dots button:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+@media(min-width:700px){
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;overflow:visible;padding:0;margin:0;}
+  .testi-grid img{flex:none;}
+  .testi-dots{display:none;}
+}
+.testi-grid img{width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 1px 3px rgba(15,92,80,.06);}
+
+/* price */
+.price-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;max-width:620px;margin:0 auto;}
+@media(min-width:640px){.price-card{padding:36px;}}
+.val-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:15.5px;}
+.val-row span:last-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.val-total{display:flex;justify-content:space-between;gap:16px;padding:16px 0 0;font-weight:700;color:var(--teal);}
+.val-total s{color:var(--muted-light);font-weight:600;}
+.price-now{text-align:center;background:var(--amber-soft);border-radius:var(--radius);padding:22px;margin:24px 0 0;}
+.price-now .amt{font-size:clamp(36px,8vw,50px);font-weight:800;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;}
+.price-now .sub{font-size:15px;color:var(--muted);margin-top:4px;}
+.price-divider{font-size:16px;color:var(--muted);text-align:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line-soft);}
+.price-divider b{display:block;color:var(--teal);margin-bottom:4px;}
+.price-note{font-size:14px;color:var(--muted-light);text-align:center;margin-top:14px;}
+
+/* akses */
+.akses .card{text-align:left;}
+.akses .card p{margin-top:8px;}
+.akses-foot{text-align:center;font-weight:700;color:var(--teal);margin-top:24px;}
+
+/* faq */
+.faq{border-top:1px solid var(--line);}
+.faq details{border-bottom:1px solid var(--line);}
+.faq summary{cursor:pointer;padding:18px 34px 18px 0;position:relative;font-weight:700;font-size:16.5px;color:var(--teal);list-style:none;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"";position:absolute;right:6px;top:26px;width:9px;height:9px;
+  border-right:2.5px solid var(--teal-mid);border-bottom:2.5px solid var(--teal-mid);
+  transform:rotate(45deg);transition:transform .18s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);top:28px;}
+.faq summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+.faq .ans{padding:0 0 20px;color:var(--muted);font-size:16.5px;}
+
+/* sticky bar */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:var(--card);border-top:1px solid var(--line);padding:10px 16px;
+  box-shadow:0 -3px 14px rgba(15,92,80,.09);
+  display:flex;align-items:center;gap:12px;
+  transform:translateY(110%);transition:transform .25s ease;
+}
+.sticky-cta.on{transform:translateY(0);}
+.sticky-cta .sp{flex:1;min-width:0;}
+.sticky-cta .sp b{display:block;font-size:17px;color:var(--teal);line-height:1.2;}
+.sticky-cta .sp small{font-size:12.5px;color:var(--muted);}
+.sticky-cta .btn{width:auto;padding:14px 20px;font-size:15.5px;flex-shrink:0;}
+@media(min-width:900px){.sticky-cta{display:none;}}
+body.has-sticky{padding-bottom:82px;}
+@media(min-width:900px){body.has-sticky{padding-bottom:0;}}
+
+/* footer */
+.site-foot{background:var(--card);border-top:1px solid var(--line);padding:30px 0;text-align:center;}
+.site-foot .logo{display:block;margin-bottom:6px;}
+.site-foot small{font-size:13.5px;color:var(--muted-light);}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(6,20,17,.92);display:none;align-items:center;justify-content:center;padding:56px 12px 20px;}
+.lb.on{display:flex;}
+.lb-inner{max-width:1100px;width:100%;max-height:100%;overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;}
+.lb img{width:auto;max-width:100%;max-height:84vh;margin:0 auto;border-radius:10px;}
+.lb.pan .lb-inner{overflow:auto;}
+.lb.pan img{max-width:none;max-height:none;width:960px;}
+.lb-close{
+  position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;
+  background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.lb-close:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+.lb-close svg{width:18px;height:18px;}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="logo">Adzan Ready <em>Kids</em></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-hd">
+        <h1>Ada cara bikin anak 7 sampai 12 tahun berdiri sholat saat adzan, tanpa kamu ulang perintahnya lima kali.</h1>
+      </div>
+      <div class="hero-img">
+        <img src="img/hero-mockup.webp" alt="Adzan Ready Kids, sistem pemicu sholat 21 hari" width="980" height="1232" fetchpriority="high">
+      </div>
+      <div class="hero-rest">
+        <p class="lead">Sekarang caranya bukan lagi tips yang kamu baca lalu lupa. Adzan Ready Kids adalah aplikasi yang memasang sistem pemicu sholat di rumahmu, lalu nemenin kamu menjalankannya hari demi hari selama 21 hari.</p>
+        <ul class="hero-bullets">
+          <li>Waktu sholat masuk? Layar Adzan Rumah bunyi, hitung mundur 5 menit jalan. Kamu gak perlu teriak dari dapur.</li>
+          <li>Anak bilang "nanti"? Satu tombol, langsung ada 3 kalimat yang sudah menyebut namanya.</li>
+          <li>Subuh drama lagi? Protokol Subuh 5 langkah dengan timer, bangunin tanpa teriak.</li>
+        </ul>
+        <div class="cta-block">
+          <a class="btn" href="checkout.html">Mulai Program 21 Hari → Rp127.000</a>
+          <p class="btn-note">Sekali bayar. Akses selamanya. Buka dari HP atau laptop, tanpa install.</p>
+        </div>
+        <div class="hero-facts">
+          <span>21 hari program</span>
+          <span>38 provinsi, 7.000+ kecamatan</span>
+          <span>Sampai 4 anak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:34px;">
+      <h2>Baca tiga ini. Kalau ada satu yang kamu alami minggu ini, kamu di tempat yang benar.</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="card-quote">“Bentar lagi, Maaa.”</p>
+        <p>Adzan Maghrib sudah lewat sepuluh menit. Dia masih di sofa, mata ke layar. Kamu ngomong kedua kali, ketiga kali, dan di kali keempat suaramu sudah naik. Dia akhirnya berdiri, sambil cemberut. Kamu tahu sholatnya cuma supaya kamu diam.</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">“Lima menit lagi...”</p>
+        <p>Jam 04.40. Kamu bangunin pelan, dia gak gerak. Lampu dinyalain, dia narik selimut. Ujungnya dia nangis, kamu ngomel, dan pagi itu dimulai dengan dua orang yang sama-sama kesal. Besok terulang lagi.</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">“Udah kok, Ma.”</p>
+        <p>Sajadahnya masih terlipat rapi. Kamu tahu dia bohong. Yang bikin sesak bukan bohongnya, tapi satu pikiran yang terus muncul: kalau aku berhenti ngingetin, jangan-jangan dia berhenti sholat.</p>
+      </div>
+    </div>
+    <p class="narrow lead center" style="margin-top:30px;">Tiga adegan ini kelihatan beda. Akarnya satu. Dan bukan karena kamu kurang tegas, atau anakmu kurang iman.</p>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>Anak gak berdiri karena suara ibunya. Anak berdiri karena rumahnya berhenti.</h2>
+      <p style="margin-top:18px;">Selama ini tugas mengingatkan cuma ada di satu tempat: mulutmu. Setiap adzan, kamu yang jadi alarm. Dan alarm yang bunyi terlalu sering, lama-lama dimatikan.</p>
+      <p>"Nanti" bukan tanda anakmu menolak sholat. Itu tanda dia sudah hafal polanya: disuruh, menunda, dimarahi, baru jalan. Selama polanya sama, jawabannya juga akan sama.</p>
+      <p>Perintah menyuruh anak sholat sejak usia 7 bisa dijalankan dengan dua cara. Lewat omelan yang diulang lima kali sehari, atau lewat kebiasaan di rumah yang bikin sholat jadi hal yang otomatis.</p>
+      <p>Adzan Ready Kids memindahkan tugas itu pelan-pelan, dari suaramu ke 5 pemicu di rumah.</p>
+
+      <div style="margin-top:32px;">
+        <div class="pemicu"><h4>Adzan Rumah</h4><p>Adzan bunyi, seisi rumah berhenti 5 menit. Orang dewasa juga.</p></div>
+        <div class="pemicu"><h4>HP Parkir</h4><p>Layar ditaruh di satu titik saat adzan. Berlaku untuk ayah dan bunda juga.</p></div>
+        <div class="pemicu"><h4>Jangkar Maghrib</h4><p>Satu sholat berjamaah wajib di rumah setiap hari, jadi patokan hari itu.</p></div>
+        <div class="pemicu"><h4>Protokol Subuh</h4><p>Bangun pagi yang tenang dimulai dari jam tidur malam sebelumnya.</p></div>
+        <div class="pemicu"><h4>Papan 21 Hari</h4><p>Anak melihat kemajuannya sendiri, dan kolom yang paling dia kejar: tanpa disuruh.</p></div>
+      </div>
+
+      <p style="margin-top:28px;font-size:20px;font-weight:800;color:var(--teal);margin-bottom:4px;">Berhenti nyuruh. Mulai pasang pemicu.</p>
+      <p style="color:var(--muted);">Tanpa bentakan, tanpa hukuman fisik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARA KERJA -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:10px;">
+      <h2>Kamu gak perlu hafal apa-apa. Aplikasinya yang nuntun.</h2>
+    </div>
+
+    <div class="step dimg">
+      <div class="step-copy">
+        <div class="step-num">1</div>
+        <h3>Isi data keluarga, sekitar 3 menit</h3>
+        <p>Nama panggilan dan usia anak (sampai 4 anak), lokasi rumah, jam tidur, siapa imam Maghrib, dan suara adzan yang mau diputar. Jadwal sholat dihitung langsung di HP dengan standar Kemenag. Sholat yang biasa dikerjakan di sekolah otomatis ditandai, jadi gak dihitung bolong.</p>
+      </div>
+      <div class="step-img">
+        <picture><source media="(min-width:800px)" srcset="img/onboarding-lokasi-d.webp"><img class="shot shot-r" data-zoom src="img/onboarding-lokasi.webp" alt="Layar wilayah domisili dengan pratinjau jadwal sholat hari ini" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="step dimg">
+      <div class="step-copy">
+        <div class="step-num">2</div>
+        <h3>Tiga hari pertama: amati dulu</h3>
+        <p>Belum ada yang perlu diubah. Tiap waktu sholat, jawab tiga pertanyaan singkat: bagaimana anak saat adzan masuk, dia sedang apa, dan kalimat apa yang tadi keluar dari mulutmu. Dari catatan jujur ini, aplikasi menyusun urutan pemicu yang paling pas untuk rumahmu.</p>
+      </div>
+      <div class="step-img">
+        <picture><source media="(min-width:800px)" srcset="img/audit-pengamatan-d.webp"><img class="shot shot-r" data-zoom src="img/audit-pengamatan.webp" alt="Catatan audit pengamatan dengan tiga pertanyaan per waktu sholat" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="step step-wide">
+      <div class="step-copy">
+        <div class="step-num">3</div>
+        <h3>Jalani 21 hari dari halaman Hari Ini</h3>
+        <p>Sholat berikutnya dan hitung mundurnya selalu ada di layar pertama. Adzan masuk, buka Layar Adzan Rumah, lalu catat dengan satu tap: Mandiri atau Diingatkan.</p>
+      </div>
+      <div class="step-img">
+        <picture>
+          <source media="(min-width:800px)" srcset="img/hari-ini-d.webp" width="1456" height="840">
+          <img class="shot shot-m" data-zoom src="img/hari-ini-m.webp" alt="Halaman Hari Ini dengan sholat berikutnya, hitung mundur, dan ceklis anak" width="504" height="952" loading="lazy">
+        </picture>
+      </div>
+    </div>
+
+    <div class="cta-block narrow center" style="margin-top:34px;">
+      <a class="btn" href="checkout.html">Mulai Program 21 Hari → Rp127.000</a>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Apa saja yang ada di dalamnya</h2>
+    </div>
+
+    <div class="feat dimg" style="border-top:none;">
+      <div class="feat-copy">
+        <p class="eyebrow">Inti program</p>
+        <h3>Jam 18.02, kamu lagi di dapur. Kamu gak perlu teriak dari sana.</h3>
+        <p style="margin-top:12px;">Begitu waktu sholat masuk, Layar Adzan Rumah memutar adzan dan menjalankan hitung mundur Rumah Berhenti 5 Menit. Semua orang, termasuk orang dewasa, parkir layar dan bersiap wudhu.</p>
+        <p>Suara adzannya bisa nada lembut bawaan, atau rekaman adzan favorit dari HP-mu sendiri. Layarnya juga bisa diatur terbuka otomatis saat waktu sholat masuk.</p>
+        <p>Di bawahnya ada satu kalimat yang boleh kamu ucapkan minggu ini. Cuma satu. Setelah itu, rumahnya yang bicara.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/layar-adzan-d.webp"><img class="shot shot-r" data-zoom src="img/layar-adzan.webp" alt="Layar Adzan Rumah dengan hitung mundur Rumah Berhenti 5 Menit" width="504" height="952" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <p class="eyebrow">Saat anak menolak</p>
+        <h3>Dia bilang "nanti". Kamu gak akan sempat buka halaman 47.</h3>
+        <p style="margin-top:12px;">Ada enam situasi yang paling sering terjadi: bilang "nanti", gak mau lepas HP, susah bangun Subuh, ngaku sudah sholat, ngajak debat, serta nangis atau ngamuk.</p>
+        <p>Pilih satu, dan kamu langsung dapat 3 langkah berisi kalimat siap ucap yang sudah menyebut nama anakmu, plus satu hal yang sebaiknya dihindari saat itu.</p>
+        <p>Pegangannya sederhana: tarik napas dulu. Kamu gak harus menang hari ini. Satu kalimat tenang lalu diam jauh lebih kuat daripada perintah yang diulang-ulang.</p>
+      </div>
+      <div class="media">
+        <div class="duo">
+          <figure>
+            <picture><source media="(min-width:860px)" srcset="img/anak-menolak-situasi-d.webp"><img class="shot" data-zoom src="img/anak-menolak-situasi.webp" alt="Daftar enam situasi saat anak menolak sholat" width="504" height="980" loading="lazy"></picture>
+            <figcaption>Pilih situasinya</figcaption>
+          </figure>
+          <figure>
+            <picture><source media="(min-width:860px)" srcset="img/anak-menolak-langkah-d.webp"><img class="shot" data-zoom src="img/anak-menolak-langkah.webp" alt="Tiga langkah kalimat siap ucap untuk anak yang bilang nanti" width="504" height="980" loading="lazy"></picture>
+            <figcaption>Langsung dapat 3 langkah</figcaption>
+          </figure>
+        </div>
+        <p class="duo-note">Geser untuk melihat langkah berikutnya.</p>
+      </div>
+    </div>
+
+    <div class="feat flip dimg">
+      <div class="feat-copy">
+        <p class="eyebrow eyebrow-amber">Khusus Subuh</p>
+        <h3>Jam 04.30, mata masih berat. Yang nuntun timer, bukan emosi.</h3>
+        <p style="margin-top:12px;">Protokol Subuh berisi lima langkah terpandu dengan timer. Dimulai dari kamu yang bangun dan wudhu duluan, lalu membangunkan anak bertahap tanpa teriak.</p>
+        <p>Jam bangun dan jam tidur bisa diatur per anak, karena Subuh yang tenang dimulai dari tidur malam sebelumnya.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/protokol-subuh-d.webp"><img class="shot shot-r" data-zoom src="img/protokol-subuh.webp" alt="Protokol Subuh interaktif dengan timer panduan" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat dimg">
+      <div class="feat-copy">
+        <p class="eyebrow">Untuk anak</p>
+        <h3>Tombol yang paling ditunggu anak: "Aku Sholat Sendiri."</h3>
+        <p style="margin-top:12px;">Mode Anak adalah layar khusus dengan dua tombol besar: "Aku Sholat Sendiri" dan "Aku Sholat Setelah Diingatkan". Anak melapor sendiri, dan pelan-pelan sholat jadi urusannya, bukan urusanmu.</p>
+        <p>Untuk keluar dari Mode Anak, tombolnya harus ditahan 3 detik. Kamu juga bisa pasang PIN 4 digit supaya pengaturan gak diutak-atik.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/mode-anak-d.webp"><img class="shot shot-r" data-zoom src="img/mode-anak.webp" alt="Mode Anak dengan tombol Aku Sholat Sendiri" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <p class="eyebrow">Pantau kemajuan</p>
+        <h3>Kamu bisa lihat kemajuannya, bukan cuma nebak.</h3>
+        <p style="margin-top:12px;">Papan 21 Hari menunjukkan persentase sholat Tanpa Disuruh, Setelah Diingatkan, dan Terlewat, lengkap per minggu. Versi cetak A4-nya bisa ditempel di dinding supaya anak ikut melihat kemajuannya sendiri.</p>
+        <p>Tiap minggu ada Evaluasi Mingguan per waktu sholat, ditutup Refleksi Orang Tua: tiga pertanyaan singkat tentang apa yang berubah di rumah.</p>
+      </div>
+      <div class="media mix">
+        <figure class="m-wide">
+          <img class="shot" data-zoom src="img/papan-21-hari.webp" alt="Papan 21 Hari Sholat dengan persentase dan matriks catatan 21 hari" width="1316" height="924" loading="lazy">
+          <figcaption>Papan 21 Hari</figcaption>
+          <p class="zoom-note">Ketuk gambar untuk memperbesar.</p>
+        </figure>
+        <figure class="m-port">
+          <picture><source media="(min-width:860px)" srcset="img/evaluasi-mingguan-d.webp"><img class="shot" data-zoom src="img/evaluasi-mingguan.webp" alt="Laporan Evaluasi Mingguan dengan grafik per waktu sholat" width="504" height="980" loading="lazy"></picture>
+          <figcaption>Evaluasi Mingguan</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <p class="eyebrow eyebrow-amber">Bank Skrip</p>
+        <h3>Kalimat yang tepat, di saat kamu kehabisan kata.</h3>
+        <p style="margin-top:12px;"><strong>Bank Pujian Spesifik.</strong> Pujian yang menyebut nama anak, dikelompokkan per waktu sholat, khusus usia 10 sampai 12, dan untuk hari-hari sulit. Tinggal tekan Salin.</p>
+        <p><strong>Kartu Saku.</strong> 12 kartu kalimat siap cetak dalam satu lembar A4. Gunting, lalu taruh di saku, di kulkas, atau dekat tempat sholat.</p>
+        <p><strong>Doa Orang Tua.</strong> Doa dari Al-Qur'an lengkap dengan teks Arab, latin, arti, dan waktu yang dianjurkan untuk membacanya.</p>
+      </div>
+      <div class="media mix rev">
+        <figure class="m-wide">
+          <img class="shot" data-zoom src="img/kartu-saku.webp" alt="Dua belas Kartu Saku siap cetak dalam satu lembar A4" width="1316" height="924" loading="lazy">
+          <figcaption>12 Kartu Saku siap cetak</figcaption>
+          <p class="zoom-note">Ketuk gambar untuk memperbesar.</p>
+        </figure>
+        <figure class="m-port">
+          <picture><source media="(min-width:860px)" srcset="img/bank-pujian-d.webp"><img class="shot" data-zoom src="img/bank-pujian.webp" alt="Bank Pujian Spesifik yang menyebut nama anak" width="504" height="952" loading="lazy"></picture>
+          <figcaption>Bank Pujian Spesifik</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="feat land">
+      <div class="feat-copy">
+        <p class="eyebrow">Saat rutinitas berubah</p>
+        <h3>Mudik, sakit, tamu menginap. Progresnya gak ikut rusak.</h3>
+        <p style="margin-top:12px;">Aktifkan Mode Jeda, dan hari program berhenti sementara.</p>
+        <p>Kalau satu hari bolong, kamu gak perlu mengulang dari nol. Yang dihitung adalah kebiasaan jangka panjang, bukan sempurna setiap hari.</p>
+      </div>
+      <div class="feat-img">
+        <img class="shot" data-zoom src="img/mode-jeda.webp" alt="Pengaturan Mode Jeda dengan pilihan alasan jeda" width="1008" height="616" loading="lazy">
+        <p class="zoom-note">Ketuk gambar untuk memperbesar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec-deep">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>21 hari. Peranmu yang makin sedikit.</h2>
+      <ul class="tl" style="margin-top:28px;">
+        <li><strong>Minggu 1: Satu kalimat, sekali.</strong><p>"Adzan sudah bunyi, rumah berhenti." Selebihnya, layar yang bekerja.</p></li>
+        <li><strong>Minggu 2: Tanpa kata-kata.</strong><p>Adzan dan HP yang diparkir jadi isyaratnya. Kamu ikut berhenti dan bersiap wudhu.</p></li>
+        <li><strong>Minggu 3: Diam dan amati.</strong><p>Kamu gak memberi isyarat apa pun. Cukup catat, lalu beri pujian spesifik saat dia berdiri sendiri.</p></li>
+      </ul>
+      <p style="margin-top:26px;color:#fff;font-weight:700;font-size:17.5px;">Tujuannya satu: tugas mengingatkan pindah dari suaramu ke kebiasaan di rumah.</p>
+      <p style="color:#A9CBC2;font-size:15.5px;">Ritme tiap anak beda. Yang menentukan bukan seberapa keras kamu mengingatkan, tapi seberapa konsisten rumahmu berhenti saat adzan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVASI -->
+<section>
+  <div class="wrap">
+    <div class="feat land" style="border-top:none;padding:0;">
+      <div class="feat-copy">
+        <h2 style="margin-bottom:14px;">Data keluargamu tetap di HP-mu.</h2>
+        <p>Nama anak, catatan sholat, dan rekaman adzan hanya tersimpan di browser perangkatmu. Tidak dikirim ke server luar, tidak ada iklan, dan tidak ada pelacakan pihak ketiga.</p>
+        <p>Mau pindah HP? Unduh file cadangan, lalu pulihkan di HP baru.</p>
+      </div>
+      <div class="feat-img">
+        <img class="shot" data-zoom src="img/privasi.webp" alt="Komitmen Privasi 100% Offline di pengaturan aplikasi" width="1008" height="560" loading="lazy">
+        <p class="zoom-note">Ketuk gambar untuk memperbesar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNTUK SIAPA -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Cocok kalau</h3>
+        <ul class="fitlist fit-yes">
+          <li>Anakmu usia 7 sampai 12 tahun, dan sholatnya masih harus disuruh.</li>
+          <li>Kamu sudah coba ancam, cabut HP, sampai membentak, dan hasilnya cuma bertahan beberapa hari.</li>
+          <li>Kamu capek jadi alarm hidupnya, tapi takut kalau berhenti mengingatkan, dia ikut berhenti sholat.</li>
+          <li>Kamu siap ikut berhenti dan parkir HP juga saat adzan.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Bukan untuk kamu kalau</h3>
+        <ul class="fitlist fit-no">
+          <li>Kamu cari aplikasi yang dimainkan anak sendirian. Ini alat untuk orang tua, dan dijalankan bersama.</li>
+          <li>Kamu cari cara menghukum. Di sini tidak ada bentakan dan hukuman fisik.</li>
+          <li>Kamu berharap anak berubah dalam 2 hari tanpa kamu ikut terlibat.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERBANDINGAN -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Kenapa aplikasi, bukan ebook.</h2>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Ebook / buku parenting</th>
+            <th>Kelas online</th>
+            <th class="hl">Adzan Ready Kids</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Saat adzan bunyi</th><td>Kamu yang harus ingat dan mengingatkan</td><td>Kamu yang harus ingat</td><td class="hl">Layar Adzan Rumah bunyi dan hitung mundur</td></tr>
+          <tr><th>Saat anak bilang "nanti"</th><td>Cari halamannya dulu</td><td>Tanya di grup</td><td class="hl">Satu tombol, 3 kalimat siap ucap</td></tr>
+          <tr><th>Jam 04.30 pagi</th><td>Baca ulang teorinya</td><td>Gak bisa diakses</td><td class="hl">Protokol Subuh bertimer</td></tr>
+          <tr><th>Jadwal sholat daerahmu</th><td>Tidak ada</td><td>Tidak ada</td><td class="hl">Otomatis, standar Kemenag</td></tr>
+          <tr><th>Memantau kemajuan</th><td>Pakai ingatan</td><td>Pakai ingatan</td><td class="hl">Papan 21 Hari dan evaluasi mingguan</td></tr>
+          <tr><th>Anak ikut terlibat</th><td>Tidak</td><td>Tidak</td><td class="hl">Mode Anak, lapor sendiri</td></tr>
+          <tr><th>Saat mudik atau sakit</th><td>Mulai lagi dari awal</td><td>Tidak dibahas</td><td class="hl">Mode Jeda</td></tr>
+          <tr><th>Menyebut nama anakmu</th><td>Tidak</td><td>Tidak</td><td class="hl">Otomatis</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Cerita dari orang tua yang sudah menjalani.</h2>
+      <p class="lead" style="margin-top:12px;"><span class="m-only">Geser untuk melihat cerita lainnya. </span>Nomor disensor untuk menjaga privasi.</p>
+    </div>
+    <div class="testi-grid">
+      <img src="img/testi1.webp" alt="Screenshot WhatsApp dari orang tua pengguna Adzan Ready Kids" width="728" height="1568" loading="lazy">
+      <img src="img/testi2.webp" alt="Screenshot WhatsApp dari orang tua pengguna Adzan Ready Kids" width="728" height="1568" loading="lazy">
+      <img src="img/testi3.webp" alt="Screenshot WhatsApp dari orang tua pengguna Adzan Ready Kids" width="728" height="1568" loading="lazy">
+    </div>
+    <div class="testi-dots" id="testiDots" aria-hidden="true">
+      <button type="button" class="on" data-i="0" aria-label="Testimoni 1"></button>
+      <button type="button" data-i="1" aria-label="Testimoni 2"></button>
+      <button type="button" data-i="2" aria-label="Testimoni 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- HARGA -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Harga satu kali jajan keluarga di akhir pekan, untuk 21 hari memasang kebiasaan sholat di rumah.</h2>
+    </div>
+    <div class="price-card">
+      <h3 class="center" style="margin-bottom:20px;">Yang kamu dapat begitu masuk</h3>
+      <div class="val-row"><span>Program 21 Hari dengan audit 3 hari pertama</span><span>Rp150.000</span></div>
+      <div class="val-row"><span>Layar Adzan Rumah dan jadwal sholat seluruh kecamatan</span><span>Rp80.000</span></div>
+      <div class="val-row"><span>Anak Menolak? 6 situasi dengan kalimat siap ucap</span><span>Rp60.000</span></div>
+      <div class="val-row"><span>Protokol Subuh 5 langkah bertimer</span><span>Rp50.000</span></div>
+      <div class="val-row"><span>Papan 21 Hari, Evaluasi Mingguan, cetak A4</span><span>Rp50.000</span></div>
+      <div class="val-row"><span>Bank Skrip: Bank Pujian, Kartu Saku, Doa Orang Tua</span><span>Rp47.000</span></div>
+      <div class="val-row"><span>Mode Anak dengan PIN</span><span>Rp40.000</span></div>
+      <div class="val-row"><span>Mode Jeda dan cadangan data</span><span>Rp20.000</span></div>
+      <div class="val-total"><span>Total nilai wajar</span><span><s>Rp497.000</s></span></div>
+
+      <div class="price-now">
+        <div style="font-size:15px;color:var(--muted);font-weight:600;">Harga hari ini</div>
+        <div class="amt">Rp127.000</div>
+        <div class="sub">Sekali bayar. Akses selamanya. Semua fitur terbuka, tanpa paket basic dan premium.</div>
+      </div>
+
+      <p class="price-divider"><b>Rp127.000 untuk 105 adzan.</b>21 hari dikali 5 waktu sholat. Hitungannya sekitar Rp1.200 per adzan yang gak perlu kamu teriakin lagi. Aplikasinya mungkin dia lupakan, tapi kebiasaan berdiri saat adzan dia bawa sampai dewasa.</p>
+
+      <div class="cta-block center">
+        <a class="btn" href="checkout.html">Ambil Akses Adzan Ready Kids → Rp127.000</a>
+        <p class="btn-note">Panduan dan kode akses dikirim ke email yang kamu pakai saat order.</p>
+      </div>
+
+      <p class="price-note">Rp127.000 adalah harga perkenalan batch awal. Harga akan naik seiring penambahan fitur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARA DAPAT AKSES -->
+<section class="sec-alt akses">
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Dari bayar sampai mulai, cuma tiga langkah.</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h4>Selesaikan pembayaran</h4>
+        <p>Bisa pakai QRIS, transfer bank, atau e-wallet.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h4>Cek email kamu</h4>
+        <p>Panduan dan kode akses dikirim otomatis begitu pembayaran terkonfirmasi. Kalau belum muncul di kotak masuk, cek folder Spam atau Promosi.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h4>Masukkan kode, lalu mulai</h4>
+        <p>Buka aplikasinya lewat link di email, ketik kode akses, isi data keluarga, dan hari pertama langsung jalan.</p>
+      </div>
+    </div>
+    <p class="akses-foot">Tanpa bikin akun, tanpa password.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="narrow">
+      <h2 class="center" style="margin-bottom:26px;">Pertanyaan yang sering masuk</h2>
+      <div class="faq">
+        <details><summary>Ini aplikasi yang harus di-install?</summary><div class="ans">Tidak. Adzan Ready Kids dibuka lewat browser di HP, tablet, atau laptop. Supaya lebih cepat dibuka, kamu bisa menyimpannya ke layar utama HP seperti aplikasi biasa.</div></details>
+        <details><summary>Bagaimana cara masuk setelah bayar?</summary><div class="ans">Begitu pembayaran terkonfirmasi, panduan memulai dikirim otomatis ke email yang kamu isi saat order. Di dalamnya ada kode akses dan langkah singkat cara masuk. Masukkan kode, isi data keluarga, lalu mulai.</div></details>
+        <details><summary>Perlu bikin akun atau password?</summary><div class="ans">Tidak. Cukup kode akses. Kalau ganti HP atau ganti browser, masukkan kode yang sama.</div></details>
+        <details><summary>Anakku lebih dari satu, bisa?</summary><div class="ans">Bisa, sampai 4 anak dalam satu akses. Masing-masing punya baris ceklis dan catatan sendiri.</div></details>
+        <details><summary>Anakku 6 tahun, atau sudah 13 tahun. Cocok?</summary><div class="ans">Program ini dirancang khusus untuk usia 7 sampai 12 tahun. Di luar rentang itu, isinya belum disesuaikan.</div></details>
+        <details><summary>Dzuhur anakku di sekolah, gimana?</summary><div class="ans">Saat isi data, kamu tandai sholat yang biasa dikerjakan di sekolah. Waktu itu otomatis ditandai "tidak terpantau", jadi gak dihitung bolong.</div></details>
+        <details><summary>Ayahnya sering belum pulang saat Maghrib?</summary><div class="ans">Imam Sholat Jangkar Maghrib bisa siapa saja yang ada di rumah, dan bisa diubah kapan pun di Pengaturan. Yang penting rumahnya berhenti.</div></details>
+        <details><summary>Kalau pindah HP, datanya ikut?</summary><div class="ans">Bisa. Sebelum pindah, unduh file cadangan dari Pengaturan. Di HP baru, masuk dengan kode yang sama, lalu pulihkan dari cadangan.</div></details>
+        <details><summary>Suara adzannya bisa diganti?</summary><div class="ans">Bisa. Pilih nada lembut bawaan, atau pakai rekaman adzan favorit dari HP-mu.</div></details>
+        <details><summary>Butuh kuota besar?</summary><div class="ans">Tidak. Jadwal sholat dihitung langsung di HP, dan isinya hanya teks, timer, dan grafik ringan.</div></details>
+        <details><summary>Ada biaya bulanan?</summary><div class="ans">Tidak ada. Sekali bayar, semua fitur langsung terbuka.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="sec-deep">
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Suatu hari, kamu gak ada di rumah waktu adzan bunyi. Di hari itu, kamu mau dia tetap berdiri.</h2>
+      <p class="lead" style="margin-top:20px;">Kamu sudah coba ngingetin baik-baik. Sudah coba tegas. Sudah coba cabut HP. Tiga hari kemudian, semuanya balik lagi seperti semula.</p>
+      <p class="lead">Bukan karena kamu kurang berusaha. Karena selama ini yang bekerja cuma suaramu, dan satu suara gak bisa jadi alarm lima kali sehari selamanya.</p>
+      <p style="font-size:21px;font-weight:800;color:#fff;margin-top:24px;">Adzan berikutnya tinggal beberapa jam lagi.</p>
+      <div class="cta-block">
+        <a class="btn" href="checkout.html">Mulai Program 21 Hari → Rp127.000</a>
+        <p class="btn-note">Sekali bayar. Akses selamanya. Buka dari HP atau laptop, tanpa install.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="logo">Adzan Ready <em>Kids</em></span>
+    <small>© 2026 Adzan Ready Kids. Semua hak dilindungi.</small>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="sp">
+    <b>Rp127.000</b>
+    <small>Sekali bayar, akses selamanya</small>
+  </div>
+  <a class="btn" href="checkout.html">Ambil Akses</a>
+</div>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Tampilan aplikasi diperbesar">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Tutup gambar">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9" stroke="#15302B" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <div class="lb-inner"><img id="lbImg" src="" alt=""></div>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('stickyCta');
+  var hero=document.querySelector('.hero');
+  if(!bar||!hero)return;
+  document.body.classList.add('has-sticky');
+  function check(){bar.classList.toggle('on',hero.getBoundingClientRect().bottom<0);}
+  check();
+  window.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check);
+})();
+
+(function(){
+  var track=document.querySelector('.testi-grid');
+  var dots=document.getElementById('testiDots');
+  if(!track||!dots)return;
+  var slides=track.querySelectorAll('img');
+  var btns=dots.querySelectorAll('button');
+  function active(){
+    var mid=track.scrollLeft+track.clientWidth/2,best=0,min=Infinity;
+    for(var i=0;i<slides.length;i++){
+      var c=slides[i].offsetLeft+slides[i].offsetWidth/2,d=Math.abs(c-mid);
+      if(d<min){min=d;best=i;}
+    }
+    for(var j=0;j<btns.length;j++)btns[j].classList.toggle('on',j===best);
+  }
+  var t;
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(active,60);},{passive:true});
+  for(var k=0;k<btns.length;k++){
+    btns[k].addEventListener('click',function(){
+      var el=slides[Number(this.getAttribute('data-i'))];
+      if(!el)return;
+      track.scrollTo({left:el.offsetLeft-(track.clientWidth-el.offsetWidth)/2,behavior:'smooth'});
+    });
+  }
+  active();
+})();
+
+(function(){
+  var lb=document.getElementById('lightbox'),img=document.getElementById('lbImg'),close=document.getElementById('lbClose');
+  var last=null;
+  function open(src,alt,wide){
+    img.src=src;img.alt=alt||'';
+    lb.classList.toggle('pan',wide&&window.innerWidth<860);
+    lb.classList.add('on');document.body.style.overflow='hidden';close.focus();
+  }
+  function shut(){lb.classList.remove('on','pan');img.src='';document.body.style.overflow='';if(last)last.focus();}
+  var zs=document.querySelectorAll('[data-zoom]');
+  for(var i=0;i<zs.length;i++){
+    zs[i].setAttribute('tabindex','0');
+    zs[i].setAttribute('role','button');
+    zs[i].addEventListener('click',function(){last=this;open(this.currentSrc||this.src,this.alt,this.naturalWidth>this.naturalHeight);});
+    zs[i].addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click();}});
+  }
+  close.addEventListener('click',shut);
+  lb.addEventListener('click',function(e){if(e.target===lb)shut();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('on'))shut();});
+})();
+</script>
+</body>
+</html>
