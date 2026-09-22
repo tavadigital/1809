@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kucing Decoder | Baca Maunya Kucing dalam 2 Menit</title>
+<meta name="description" content="Aplikasi di HP yang membaca meong, bahasa tubuh, dan gejala anabulmu, lalu kasih langkah 5 menit dan tanda kapan harus ke dokter hewan. Sekali bayar, tanpa langganan.">
+<meta property="og:title" content="Kucing Decoder | Baca Maunya Kucing dalam 2 Menit">
+<meta property="og:description" content="Aplikasi di HP yang membaca meong, bahasa tubuh, dan gejala anabulmu. Sekali bayar, tanpa langganan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#2E2A4F;
+  --teal-deep:#1C182F;
+  --teal-mid:#4A4578;
+  --teal-soft:#ECEAF5;
+  --amber:#F29A48;
+  --amber-deep:#D9802F;
+  --amber-soft:#FDF2DC;
+  --amber-ink:#1C182F;
+  --green:#2F8F5B;
+  --green-soft:#E3F4EA;
+  --red:#C53131;
+  --red-soft:#FCE8E7;
+  --bg:#FAF7F0;
+  --card:#FFFFFF;
+  --line:#ECE6DA;
+  --line-soft:#F3EEE4;
+  --ink:#1C182F;
+  --muted:#565462;
+  --muted-light:#8A8796;
+  --radius:14px;
+  --radius-lg:20px;
+  --maxw:1120px;
+  --maxw-text:680px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.65;overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;}
+h1,h2,h3,h4{margin:0;line-height:1.22;letter-spacing:-0.02em;font-weight:800;color:var(--teal);}
+h1{font-size:clamp(27px,5.4vw,44px);}
+h2{font-size:clamp(23px,4vw,34px);}
+h3{font-size:clamp(19px,2.6vw,24px);}
+h4{font-size:17px;font-weight:700;}
+p{margin:0 0 1rem;}
+p:last-child{margin-bottom:0;}
+strong{font-weight:700;color:var(--teal);}
+
+/* layout */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+.narrow{max-width:var(--maxw-text);margin-left:auto;margin-right:auto;}
+section{padding:56px 0;}
+@media(min-width:768px){section{padding:76px 0;}}
+.sec-alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.sec-deep{background:var(--teal-deep);color:#fff;}
+.sec-deep h2,.sec-deep h3{color:#fff;}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--teal-mid);margin:0 0 10px;}
+.eyebrow-amber{color:var(--amber-deep);}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--muted);}
+.sec-deep .lead{color:#CFCBE6;}
+.center{text-align:center;}
+
+/* header */
+.site-head{background:var(--card);border-bottom:1px solid var(--line);padding:14px 0;position:relative;z-index:5;}
+.logo{font-size:19px;font-weight:800;letter-spacing:-0.03em;color:var(--teal);}
+.logo em{font-style:normal;color:var(--amber-deep);}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--amber);color:var(--amber-ink);text-decoration:none;
+  font-weight:800;font-size:17px;letter-spacing:-0.01em;
+  padding:17px 28px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 2px 0 var(--amber-deep);
+  transition:transform .12s ease,box-shadow .12s ease;
+  text-align:center;width:100%;
+}
+@media(min-width:560px){.btn{width:auto;font-size:18px;padding:18px 34px;}}
+.btn:hover{transform:translateY(-1px);box-shadow:0 3px 0 var(--amber-deep);}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--amber-deep);}
+.btn:focus-visible{outline:3px solid var(--teal);outline-offset:3px;}
+.sec-deep .btn:focus-visible{outline-color:#fff;}
+.btn-note{font-size:14.5px;color:var(--muted);margin-top:12px;}
+.sec-deep .btn-note{color:#BDB8D8;}
+.cta-block{margin-top:26px;}
+
+/* hero */
+.hero{background:var(--card);padding:28px 0 44px;border-bottom:1px solid var(--line);}
+.hero-grid{display:block;}
+.hero-img{margin:22px -20px 24px;}
+@media(min-width:900px){
+  .hero{padding:64px 0 72px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1fr 460px;
+    grid-template-areas:"hd img" "rest img";
+    column-gap:56px;align-items:center;
+  }
+  .hero-hd{grid-area:hd;align-self:end;}
+  .hero-rest{grid-area:rest;align-self:start;padding-top:18px;}
+  .hero-img{grid-area:img;margin:0;align-self:center;}
+  .hero-img img{border-radius:var(--radius-lg);}
+}
+.hero-bullets{list-style:none;padding:0;margin:22px 0 0;}
+.hero-bullets li{position:relative;padding-left:30px;margin-bottom:12px;font-size:16.5px;color:var(--ink);}
+.hero-bullets li::before{
+  content:"";position:absolute;left:0;top:9px;width:16px;height:16px;border-radius:50%;
+  background:var(--green-soft);border:2px solid var(--green);
+}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:20px;font-size:14.5px;color:var(--muted);font-weight:600;}
+.hero-facts span{white-space:nowrap;}
+
+/* cards */
+.grid{display:grid;gap:18px;}
+@media(min-width:760px){.grid-3{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:640px){.grid-2{grid-template-columns:repeat(2,1fr);}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+.sec-alt .card{background:var(--bg);}
+.card-quote{font-size:18px;font-weight:800;color:var(--teal);margin:0 0 10px;line-height:1.35;}
+.card p{font-size:16px;color:var(--muted);}
+
+/* pemicu */
+.pemicu{border-left:4px solid var(--teal-mid);padding:4px 0 4px 18px;margin-bottom:20px;}
+.pemicu:nth-child(2){border-color:var(--amber);}
+.pemicu:nth-child(3){border-color:var(--green);}
+.pemicu:nth-child(4){border-color:var(--teal-deep);}
+.pemicu:nth-child(5){border-color:var(--amber-deep);}
+.pemicu h4{margin-bottom:4px;}
+.pemicu p{font-size:16px;color:var(--muted);margin:0;}
+
+/* steps */
+.step{display:grid;gap:20px;padding:28px 0;border-top:1px solid var(--line);}
+.step:first-of-type{border-top:none;}
+@media(min-width:800px){
+  .step{grid-template-columns:1fr 280px;gap:48px;align-items:center;}
+  .step.dimg{grid-template-columns:1fr 1.35fr;}
+  .step-img{order:2;}
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--teal);color:#fff;font-weight:800;font-size:16px;margin-bottom:12px;
+}
+.step-copy p{color:var(--muted);margin-top:10px;}
+.step-wide{display:block;}
+.step-wide .step-copy{max-width:var(--maxw-text);}
+.step-wide .step-img{margin-top:24px;}
+@media(min-width:800px){.step-wide .shot-m{max-width:980px;}}
+
+/* screenshot frames */
+.shot{border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:0 1px 3px rgba(28,24,47,.06);}
+.shot-m{max-width:320px;margin-left:auto;margin-right:auto;}
+.shot-r{max-width:320px;width:100%;margin-left:auto;margin-right:auto;}
+@media(min-width:860px){.shot-r{max-width:100%;}}
+@media(min-width:800px){.step .shot-r{max-width:100%;}}
+.shot-d{max-width:980px;margin-left:auto;margin-right:auto;}
+[data-zoom]{cursor:zoom-in;}
+.m-only{display:inline;}
+@media(min-width:700px){.m-only{display:none;}}
+.zoom-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+@media(min-width:860px){.zoom-note{display:none;}}
+figure{margin:0;}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;text-align:center;}
+
+/* feature rows */
+.feat{display:grid;gap:24px;padding:40px 0;border-top:1px solid var(--line);}
+@media(min-width:860px){
+  .feat{grid-template-columns:1fr 340px;gap:56px;align-items:center;}
+  .feat-img{order:2;}
+  .feat.flip{grid-template-columns:340px 1fr;}
+  .feat.flip .feat-img{order:1;}
+  .feat.flip .feat-copy{order:2;}
+  .feat.land{grid-template-columns:1fr 500px;}
+  .feat.dimg{grid-template-columns:1fr 1.35fr;}
+  .feat.dimg.flip{grid-template-columns:1.35fr 1fr;}
+}
+.feat-copy h3{margin-bottom:12px;}
+.feat-copy p{color:var(--muted);font-size:16.5px;}
+.feat-block{padding:40px 0;border-top:1px solid var(--line);}
+.feat-block .feat-copy{max-width:var(--maxw-text);}
+.feat-block .media{margin-top:26px;}
+
+/* duo: dua screenshot portrait */
+.duo{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.duo::-webkit-scrollbar{display:none;}
+.duo figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:700px){
+  .duo{display:grid;grid-template-columns:repeat(2,320px);justify-content:center;gap:28px;overflow:visible;padding:0;margin:0;}
+  .duo figure{max-width:none;}
+}
+@media(min-width:860px){
+  .duo{grid-template-columns:1fr 1fr;gap:24px;}
+  .duo-note{display:none;}
+}
+.duo-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+
+/* mix: satu screenshot lebar + satu portrait */
+.mix{display:grid;gap:22px;}
+.mix .m-port{max-width:320px;width:100%;margin:0 auto;}
+@media(min-width:860px){
+  .mix{grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+  .mix.rev{grid-template-columns:1fr 1fr;}
+  .mix .m-port{max-width:none;}
+  .mix.rev .m-wide{order:2;}
+  .mix.rev .m-port{order:1;}
+}
+
+/* timeline */
+.tl{list-style:none;padding:0;margin:0;}
+.tl li{position:relative;padding:0 0 26px 30px;border-left:2px solid rgba(255,255,255,.22);}
+.tl li:last-child{border-left-color:transparent;padding-bottom:0;}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--amber);}
+.tl strong{display:block;color:#fff;font-size:15px;letter-spacing:.02em;margin-bottom:3px;}
+.tl p{color:#CFCBE6;font-size:16.5px;margin:0;}
+
+/* fit lists */
+.fitlist{list-style:none;padding:0;margin:0;}
+.fitlist li{position:relative;padding-left:30px;margin-bottom:13px;font-size:16.5px;}
+.fitlist li::before{position:absolute;left:0;top:0;font-weight:800;font-size:17px;}
+.fit-yes li::before{content:"✓";color:var(--green);}
+.fit-no li::before{content:"✕";color:var(--red);}
+
+/* table */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:15.5px;background:var(--card);}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+thead th{font-size:13px;font-weight:700;color:var(--muted);border-bottom:2px solid var(--line);}
+thead th.hl{color:var(--teal);}
+tbody td.hl{font-weight:700;color:var(--teal);background:var(--teal-soft);}
+tbody th{font-weight:600;color:var(--ink);width:26%;}
+
+/* testimoni */
+.testi-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.testi-grid::-webkit-scrollbar{display:none;}
+.testi-grid img{flex:0 0 78%;scroll-snap-align:center;}
+.testi-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+.testi-dots button{width:8px;height:8px;padding:0;border:none;border-radius:50%;background:var(--line);cursor:pointer;transition:background .2s ease,width .2s ease;}
+.testi-dots button.on{background:var(--teal);width:22px;border-radius:5px;}
+.testi-dots button:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+@media(min-width:700px){
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;overflow:visible;padding:0;margin:0;}
+  .testi-grid img{flex:none;}
+  .testi-dots{display:none;}
+}
+.testi-grid img{width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 1px 3px rgba(28,24,47,.06);}
+
+/* price */
+.price-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;max-width:620px;margin:0 auto;}
+@media(min-width:640px){.price-card{padding:36px;}}
+.val-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:15.5px;}
+.val-row span:last-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.val-total{display:flex;justify-content:space-between;gap:16px;padding:16px 0 0;font-weight:700;color:var(--teal);}
+.val-total s{color:var(--muted-light);font-weight:600;}
+.price-now{text-align:center;background:var(--amber-soft);border-radius:var(--radius);padding:22px;margin:24px 0 0;}
+.price-now .amt{font-size:clamp(36px,8vw,50px);font-weight:800;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;}
+.price-now .sub{font-size:15px;color:var(--muted);margin-top:4px;}
+.price-divider{font-size:16px;color:var(--muted);text-align:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line-soft);}
+.price-divider b{display:block;color:var(--teal);margin-bottom:4px;}
+.price-note{font-size:14px;color:var(--muted-light);text-align:center;margin-top:14px;}
+
+/* akses */
+.akses .card{text-align:left;}
+.akses .card p{margin-top:8px;}
+.akses-foot{text-align:center;font-weight:700;color:var(--teal);margin-top:24px;}
+
+/* faq */
+.faq{border-top:1px solid var(--line);}
+.faq details{border-bottom:1px solid var(--line);}
+.faq summary{cursor:pointer;padding:18px 34px 18px 0;position:relative;font-weight:700;font-size:16.5px;color:var(--teal);list-style:none;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"";position:absolute;right:6px;top:26px;width:9px;height:9px;
+  border-right:2.5px solid var(--teal-mid);border-bottom:2.5px solid var(--teal-mid);
+  transform:rotate(45deg);transition:transform .18s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);top:28px;}
+.faq summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+.faq .ans{padding:0 0 20px;color:var(--muted);font-size:16.5px;}
+
+/* sticky bar */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:var(--card);border-top:1px solid var(--line);padding:10px 16px;
+  box-shadow:0 -3px 14px rgba(28,24,47,.09);
+  display:flex;align-items:center;gap:12px;
+  transform:translateY(110%);transition:transform .25s ease;
+}
+.sticky-cta.on{transform:translateY(0);}
+.sticky-cta .sp{flex:1;min-width:0;}
+.sticky-cta .sp b{display:block;font-size:17px;color:var(--teal);line-height:1.2;}
+.sticky-cta .sp small{font-size:12.5px;color:var(--muted);}
+.sticky-cta .btn{width:auto;padding:14px 20px;font-size:15.5px;flex-shrink:0;}
+@media(min-width:900px){.sticky-cta{display:none;}}
+body.has-sticky{padding-bottom:82px;}
+@media(min-width:900px){body.has-sticky{padding-bottom:0;}}
+
+/* footer */
+.site-foot{background:var(--card);border-top:1px solid var(--line);padding:30px 0;text-align:center;}
+.site-foot .logo{display:block;margin-bottom:6px;}
+.site-foot small{font-size:13.5px;color:var(--muted-light);}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(16,13,28,.92);display:none;align-items:center;justify-content:center;padding:56px 12px 20px;}
+.lb.on{display:flex;}
+.lb-inner{max-width:1100px;width:100%;max-height:100%;overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;}
+.lb img{width:auto;max-width:100%;max-height:84vh;margin:0 auto;border-radius:10px;}
+.lb.pan .lb-inner{overflow:auto;}
+.lb.pan img{max-width:none;max-height:none;width:960px;}
+.lb-close{
+  position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;
+  background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.lb-close:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+.lb-close svg{width:18px;height:18px;}
+
+
+/* trio: 3 screenshot (mobile geser, desktop 1 lebar + 2 berdampingan) */
+.trio{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.trio::-webkit-scrollbar{display:none;}
+.trio figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:860px){
+  .trio{display:grid;grid-template-columns:1fr 1fr;gap:24px;overflow:visible;padding:0;margin:0;align-items:start;}
+  .trio figure{max-width:none;}
+  .trio figure:first-child{grid-column:1 / -1;width:100%;max-width:760px;justify-self:center;}
+}
+.duo{align-items:start;}
+
+/* pair: satu portrait + satu lebar */
+.pair{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.pair::-webkit-scrollbar{display:none;}
+.pair figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:700px){
+  .pair{display:grid;grid-template-columns:repeat(2,320px);justify-content:center;gap:28px;overflow:visible;padding:0;margin:0;}
+  .pair figure{max-width:none;}
+}
+@media(min-width:860px){
+  .pair{grid-template-columns:300px 1fr;gap:28px;align-items:start;}
+}
+.swipe-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+@media(min-width:860px){.swipe-note{display:none;}}
+
+/* batas jujur */
+.honest{display:grid;gap:14px;margin-top:22px;}
+.honest-item{border-radius:var(--radius);padding:18px 20px;font-size:16.5px;}
+.honest-yes{background:var(--green-soft);}
+.honest-no{background:var(--red-soft);}
+.honest-item b{display:block;margin-bottom:4px;}
+.honest-yes b{color:var(--green);}
+.honest-no b{color:var(--red);}
+
+/* checklist penawaran */
+.getlist{list-style:none;padding:0;margin:0;}
+.getlist li{position:relative;padding:11px 0 11px 30px;border-bottom:1px solid var(--line-soft);font-size:15.5px;}
+.getlist li::before{content:"✓";position:absolute;left:2px;top:10px;font-weight:800;color:var(--green);}
+.price-lead{font-size:17px;color:var(--muted);max-width:560px;margin:14px auto 0;}
+
+/* testimoni dengan caption */
+.testi-grid figure{flex:0 0 78%;scroll-snap-align:center;margin:0;}
+@media(min-width:700px){.testi-grid figure{flex:none;}}
+.testi-grid figcaption{font-size:14px;color:var(--muted);margin-top:10px;text-align:center;}
+.testi-grid figcaption i{font-style:normal;font-weight:700;color:var(--teal);}
+
+@media(min-width:860px){.shot-wide{max-width:980px;width:100%;}}
+.akses-shot{max-width:280px;margin:28px auto 0;}
+@media(min-width:860px){.akses-shot{max-width:760px;}}
+.small-feat{padding:40px 0;border-top:1px solid var(--line);}
+.small-feat h4{color:var(--teal);margin-bottom:6px;}
+.small-feat p{color:var(--muted);font-size:16.5px;}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="logo">Kucing <em>Decoder</em></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-hd">
+        <h1>Kucingmu lagi ngomong sesuatu. Sekarang kamu bisa baca maunya dalam 2 menit.</h1>
+      </div>
+      <div class="hero-img">
+        <img src="img/hero-mockup.webp" alt="Kucing Decoder, aplikasi untuk membaca meong, bahasa tubuh, dan sinyal bahaya kucing" width="980" height="1232" fetchpriority="high">
+      </div>
+      <div class="hero-rest">
+        <p class="lead">Kucing Decoder adalah aplikasi di HP yang membaca meong, bahasa tubuh, dan gejala anabulmu. Hasilnya: kemungkinan maunya apa, langkah 5 menit yang bisa langsung kamu coba, dan kapan harus ke dokter hewan.</p>
+        <ul class="hero-bullets">
+          <li>Meong kencang tengah malam? Rekam 5 detik, keluar 3 kemungkinan kebutuhannya.</li>
+          <li>Dielus malah nyakar? Cek ekor dan telinganya, langsung tahu aman dipegang atau biarkan dulu.</li>
+          <li>Dari pagi gak mau makan? Cek Bahaya bantu kamu tahu seberapa darurat kondisinya.</li>
+        </ul>
+        <div class="cta-block">
+          <a class="btn" href="checkout.html">Mulai Baca Anabulku → Rp127.000</a>
+          <p class="btn-note">Sekali bayar. Tanpa langganan. Buka dari browser HP, tanpa install.</p>
+        </div>
+        <div class="hero-facts">
+          <span>3 decoder</span>
+          <span>Hasil dalam 2 menit</span>
+          <span>Bisa untuk lebih dari satu anabul</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PENGENALAN MASALAH -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:34px;">
+      <h2>Baca tiga ini. Kalau ada satu yang kejadian minggu ini, kamu di tempat yang benar.</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="card-quote">“Meooong. Meooong.”</p>
+        <p>Jam 3 pagi. Dia duduk di depan pintu kamar dan meong kencang, berulang-ulang. Kamu bangun, cek mangkuknya, masih ada isinya. Kamu elus, dia tetap meong. Kamu balik tidur sambil mikir, dia kenapa sih?</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">Kolong kasur, sejak pagi.</p>
+        <p>Biasanya dia yang pertama nyamperin tiap kamu buka makanan. Hari ini dipanggil gak nongol, makanannya gak disentuh. Kamu buka Google, keluar 12 penyebab. Dari “cuma stres” sampai “segera ke dokter”. Yang mana?</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">Lagi enak dielus, tiba-tiba nyakar.</p>
+        <p>Tadi dia sendiri yang naik ke pangkuanmu. Tiga detik kemudian tanganmu sudah baret. Kamu mulai mikir mungkin dia memang galak dari sananya.</p>
+      </div>
+    </div>
+    <p class="narrow lead center" style="margin-top:30px;">Tiga kejadian ini kelihatan beda, tapi masalahnya sama: dia jelas lagi ngomong sesuatu, kamu gak ngerti, dan kamu takut kalau salah nebak ternyata dia sakit.</p>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>Kucingmu gak pernah diam. Dia ngomong lewat tiga jalur sekaligus.</h2>
+      <p style="margin-top:18px;">Lewat suaranya. Lewat badannya: ekor, telinga, mata, postur. Lewat gejalanya: makan, minum, pipis, tingkahnya hari ini.</p>
+      <p>Selama ini kita cuma nebak dari satu jalur, biasanya suaranya. Padahal meong yang sama bisa berarti lapar, bosan, minta keluar, atau kesakitan. Bedanya ada di jalur yang lain.</p>
+      <p>Jujur dulu: gak ada aplikasi yang bisa nerjemahin kucing kata per kata. Termasuk yang ini. Yang bisa dibaca adalah <strong>polanya</strong>: bunyi apa, jam berapa, di mana, badannya lagi gimana, dan apa yang beda dari biasanya.</p>
+      <p>Itu yang dikerjakan <strong>Decoder 3 Lapis</strong>:</p>
+
+      <div style="margin-top:24px;">
+        <div class="pemicu"><h4>Meong</h4><p>Membaca jenis bunyi dan konteksnya.</p></div>
+        <div class="pemicu"><h4>Bahasa Tubuh</h4><p>Membaca mood dari ekor, telinga, mata, postur, dan bulu.</p></div>
+        <div class="pemicu"><h4>Sinyal Bahaya</h4><p>Membaca gejala untuk tahu seberapa darurat kondisinya.</p></div>
+      </div>
+
+      <p style="margin-top:28px;font-size:20px;font-weight:800;color:var(--teal);">Berhenti nebak. Mulai baca.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARA KERJA -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:10px;">
+      <h2>Gak perlu hafal arti meong. Aplikasinya yang baca.</h2>
+    </div>
+
+    <div class="step dimg" style="border-top:none;">
+      <div class="step-copy">
+        <div class="step-num">1</div>
+        <h3>Kenalkan anabulmu, sekitar 1 menit</h3>
+        <p>Nama, umur, steril atau belum, indoor atau sering keluar, makanan utamanya. Dari sini bacaannya disesuaikan dengan kucingmu sendiri, bukan kucing pada umumnya.</p>
+      </div>
+      <div class="step-img">
+        <picture><source media="(min-width:800px)" srcset="img/profil-anabul-d.webp" width="1232" height="980"><img class="shot shot-r" data-zoom src="img/profil-anabul.webp" alt="Layar Profil Anabul Pertama berisi nama, umur, status steril, aktivitas, dan makanan" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="step step-wide">
+      <div class="step-copy">
+        <div class="step-num">2</div>
+        <h3>Saat dia bertingkah, pilih decodernya</h3>
+        <p>Dia meong? Buka Dengar Meongnya. Mau dielus tapi ragu? Buka Baca Badannya. Kelihatan gak beres? Buka Cek Bahaya.</p>
+      </div>
+      <div class="step-img">
+        <picture><source media="(min-width:800px)" srcset="img/beranda-d.webp" width="1372" height="896"><img class="shot shot-m" data-zoom src="img/beranda.webp" alt="Beranda Kucing Decoder dengan empat decoder: Dengar Meongnya, Baca Badannya, Cek Bahaya, dan Ngobrol Iseng" width="476" height="980" loading="lazy"></picture>
+        <p class="zoom-note">Ketuk gambar untuk memperbesar.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-copy" style="max-width:var(--maxw-text);">
+        <div class="step-num">3</div>
+        <h3>Dapat jawaban yang bisa langsung dipakai</h3>
+        <p>Kemungkinan maunya apa, satu hal yang bisa kamu coba dalam 5 menit, dan tanda kapan ini bukan sekadar cari perhatian.</p>
+      </div>
+    </div>
+
+    <div class="cta-block narrow center" style="margin-top:34px;">
+      <a class="btn" href="checkout.html">Mulai Baca Anabulku → Rp127.000</a>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Apa saja yang ada di dalamnya</h2>
+    </div>
+
+    <div class="feat-block" style="border-top:none;">
+      <div class="feat-copy">
+        <h3>Dengar Meongnya</h3>
+        <p style="margin-top:6px;font-weight:700;color:var(--teal);font-size:18px;">Jam 02.14, dia meong di depan pintu. Kamu gak perlu nebak sambil setengah tidur.</p>
+        <p>Rekam suaranya 5 detik, atau pilih jenis bunyinya: pendek berulang, panjang melengking, serak, geraman, dengkuran, atau ratapan malam. Lalu jawab 4 pertanyaan singkat: jam berapa, di mana, sudah makan atau belum, dan badannya lagi gimana.</p>
+        <p>Hasilnya 3 kemungkinan kebutuhan, diurutkan dari yang paling mungkin. Masing-masing lengkap dengan satu hal yang bisa kamu coba dalam 5 menit.</p>
+      </div>
+      <div class="media">
+        <div class="duo">
+          <figure><picture><source media="(min-width:860px)" srcset="img/rekam-meong-d.webp" width="1372" height="896"><img class="shot" data-zoom src="img/rekam-meong.webp" alt="Layar Dengar Meongnya saat merekam suara, dengan pilihan jenis bunyi" width="504" height="980" loading="lazy"></picture><figcaption>Rekam 5 detik atau pilih bunyinya</figcaption></figure>
+          <figure><picture><source media="(min-width:860px)" srcset="img/hasil-meong-d.webp" width="1232" height="980"><img class="shot" data-zoom src="img/hasil-meong.webp" alt="Hasil pembacaan meong berisi 3 kemungkinan kebutuhan dan langkah coba dalam 5 menit" width="476" height="980" loading="lazy"></picture><figcaption>Hasilnya 3 kemungkinan kebutuhan</figcaption></figure>
+        </div>
+        <p class="swipe-note">Geser untuk melihat hasilnya.</p>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <h3>Baca Badannya</h3>
+        <p style="margin-top:6px;font-weight:700;color:var(--teal);font-size:18px;">Mau dielus, tapi takut dicakar? Lihat dulu ekor dan telinganya.</p>
+        <p>Ketuk posisi ekor, arah telinga, bentuk pupil, postur badan, dan kondisi bulunya. Atau cukup foto anabulnya.</p>
+        <p>Hasilnya langsung jelas: <strong>Aman dipegang</strong> atau <strong>Biarkan dulu</strong>. Ditambah mood-nya saat ini, apa yang terbaca dari tubuhnya, dan satu hal yang sebaiknya kamu lakukan.</p>
+      </div>
+      <div class="media">
+        <div class="trio">
+          <figure><picture><source media="(min-width:860px)" srcset="img/baca-badan-d.webp" width="1232" height="980"><img class="shot" data-zoom src="img/baca-badan.webp" alt="Layar Baca Badannya dengan pilihan posisi ekor, arah telinga, sorot mata, dan postur" width="504" height="980" loading="lazy"></picture><figcaption>Ketuk bagian tubuhnya, atau pakai foto</figcaption></figure>
+          <figure><picture><source media="(min-width:860px)" srcset="img/aman-dipegang-d.webp" width="1232" height="980"><img class="shot" data-zoom src="img/aman-dipegang.webp" alt="Hasil Baca Badannya dengan rekomendasi Aman dipegang" width="504" height="980" loading="lazy"></picture><figcaption>Hasil: Aman dipegang</figcaption></figure>
+          <figure><picture><source media="(min-width:860px)" srcset="img/biarkan-dulu-d.webp" width="1204" height="1008"><img class="shot" data-zoom src="img/biarkan-dulu.webp" alt="Hasil Baca Badannya dengan rekomendasi Biarkan dulu" width="504" height="980" loading="lazy"></picture><figcaption>Hasil: Biarkan dulu</figcaption></figure>
+        </div>
+        <p class="swipe-note">Geser untuk melihat hasilnya.</p>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <h3>Cek Bahaya</h3>
+        <p style="margin-top:6px;font-weight:700;color:var(--teal);font-size:18px;">Dari pagi gak mau makan. Klinik 24 jam, atau tunggu besok?</p>
+        <p>Centang gejala yang kamu lihat, lalu isi sudah berapa lama gejalanya muncul. Cek Bahaya bantu kamu tahu seberapa darurat kondisi anabulmu: masih bisa dipantau di rumah, atau harus segera ke dokter hewan.</p>
+      </div>
+      <div class="media">
+        <div class="duo">
+          <figure><picture><source media="(min-width:860px)" srcset="img/cek-bahaya-gejala-d.webp" width="1232" height="980"><img class="shot" data-zoom src="img/cek-bahaya-gejala.webp" alt="Layar Cek Bahaya berisi daftar gejala yang bisa dicentang" width="476" height="952" loading="lazy"></picture><figcaption>Centang gejala yang terlihat</figcaption></figure>
+          <figure><picture><source media="(min-width:860px)" srcset="img/cek-bahaya-durasi-d.webp" width="1372" height="588"><img class="shot" data-zoom src="img/cek-bahaya-durasi.webp" alt="Layar Sudah Berapa Lama untuk mengisi durasi tiap gejala" width="476" height="952" loading="lazy"></picture><figcaption>Isi sudah berapa lama</figcaption></figure>
+        </div>
+        <p class="swipe-note">Geser untuk melihat langkah berikutnya.</p>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <h3>Cek Harian dan Riwayat</h3>
+        <p style="margin-top:6px;font-weight:700;color:var(--teal);font-size:18px;">Makin sering dipakai, makin kenal kucingmu.</p>
+        <p>Cek Harian cuma 20 detik: porsi makan, minum, pipis dan pup, tingkat aktivitas, dan mood hari ini. Setelah 7 hari, aplikasi punya gambaran “normal”-nya anabulmu, jadi hal yang gak biasa lebih cepat ketahuan.</p>
+        <p>Di Riwayat, kamu bisa lihat pola jam meongnya selama 14 hari terakhir. Misalnya ternyata dia selalu meong jam 10 malam. Itu bukan sakit, itu jam dia minta ditemani main.</p>
+      </div>
+      <div class="media">
+        <div class="duo">
+          <figure><picture><source media="(min-width:860px)" srcset="img/cek-harian-d.webp" width="1204" height="1008"><img class="shot" data-zoom src="img/cek-harian.webp" alt="Layar Cek Harian 20 Detik untuk porsi makan, minum, pipis, aktivitas, dan mood" width="504" height="980" loading="lazy"></picture><figcaption>Cek Harian 20 detik</figcaption></figure>
+          <figure><picture><source media="(min-width:860px)" srcset="img/riwayat-d.webp" width="1232" height="980"><img class="shot" data-zoom src="img/riwayat.webp" alt="Riwayat dengan grafik Pola Jam Meong 14 hari dan catatan sebelumnya" width="504" height="980" loading="lazy"></picture><figcaption>Pola Jam Meong 14 hari</figcaption></figure>
+        </div>
+        <p class="swipe-note">Geser untuk melihat Riwayat.</p>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <h3>Kamus Suara Kucing dan Protokol 7 Hari</h3>
+        <p style="margin-top:6px;font-weight:700;color:var(--teal);font-size:18px;">Untuk masalah yang terus berulang.</p>
+        <p>Kamus Suara Kucing berisi 12 bunyi khas kucing, lengkap dengan arti umum, konteks yang sering terjadi di rumah Indonesia, dan kapan kamu perlu waspada. Kamu juga bisa merekam versi anabulmu sendiri.</p>
+        <p>Protokol 7 Hari Perilaku disiapkan untuk tiga masalah yang paling bikin capek: meong malam, pipis di luar litter box, serta gigit dan cakar mendadak. Rencana hariannya menyesuaikan kondisi kucingmu.</p>
+      </div>
+      <div class="media">
+        <div class="duo">
+          <figure><picture><source media="(min-width:860px)" srcset="img/kamus-d.webp" width="1204" height="980"><img class="shot" data-zoom src="img/kamus.webp" alt="Kamus Bunyi Kucing berisi arti umum, konteks khas Indonesia, dan kapan perlu waspada" width="504" height="980" loading="lazy"></picture><figcaption>Kamus Suara Kucing</figcaption></figure>
+          <figure><picture><source media="(min-width:860px)" srcset="img/protokol-d.webp" width="1344" height="728"><img class="shot" data-zoom src="img/protokol.webp" alt="Protokol 7 Hari Adaptif untuk meong malam, pipis di luar litter box, serta gigit dan cakar" width="504" height="980" loading="lazy"></picture><figcaption>Protokol 7 Hari Perilaku</figcaption></figure>
+        </div>
+        <p class="swipe-note">Geser untuk melihat Protokol 7 Hari.</p>
+      </div>
+    </div>
+
+    <div class="feat dimg">
+      <div class="feat-copy">
+        <h3>Ngobrol Iseng</h3>
+        <p style="margin-top:6px;font-weight:700;color:var(--teal);font-size:18px;">Yang ini buat seru-seruan.</p>
+        <p>Pilih kalimat seperti “Kamu lapar?” atau “Ayo main!”, atau rekam suaramu sendiri, lalu putar sebagai suara meong ke anabulmu. Ini mode hiburan, bukan terjemahan sungguhan. Tapi reaksi kucingmu biasanya layak direkam.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/ngobrol-iseng-d.webp" width="1344" height="868"><img class="shot shot-r" data-zoom src="img/ngobrol-iseng.webp" alt="Fun Mode Kirim Suara ke Luna dengan 12 kalimat kucing" width="504" height="952" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <h3>Yang bikin tenang dipakai tiap hari</h3>
+        <p style="margin-top:12px;"><strong>Mode Malam.</strong> Antara jam 22.00 sampai 05.00, aplikasi menawarkan Mode Malam. Sekali tap, layarnya jadi gelap, tombolnya besar, dan yang ditampilkan dua fitur yang paling dibutuhkan tengah malam: Dengar Meongnya dan Cek Bahaya.</p>
+      </div>
+      <div class="media" style="max-width:980px;margin-left:auto;margin-right:auto;">
+        <picture><source media="(min-width:860px)" srcset="img/mode-malam-d.webp" width="1400" height="560"><img class="shot shot-m shot-wide" data-zoom src="img/mode-malam.webp" alt="Mode Malam Fokus Darurat dengan tombol Dengar Meongnya dan Cek Bahaya" width="504" height="952" loading="lazy"></picture>
+        <p class="zoom-note">Ketuk gambar untuk memperbesar.</p>
+      </div>
+    </div>
+
+    <div class="feat flip dimg">
+      <div class="feat-copy">
+        <p><strong>Lebih dari satu kucing.</strong> Tiap anabul punya profil, catatan harian, dan riwayatnya sendiri.</p>
+        <p><strong>Data anabul tersimpan di HP-mu.</strong> Mau ganti HP? Simpan cadangannya, lalu pulihkan di HP baru.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/pilih-anabul-d.webp" width="1232" height="980"><img class="shot shot-r" data-zoom src="img/pilih-anabul.webp" alt="Pilih Anabul Aktif dengan tombol Tambah Anabul Baru dan Cadangan Data Anabul" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BATAS JUJUR -->
+<section>
+  <div class="wrap">
+    <div class="feat dimg" style="border-top:none;padding:0;">
+      <div class="feat-copy">
+        <h2>Supaya jelas dari awal</h2>
+        <div class="honest">
+          <div class="honest-item honest-yes"><b>Kucing Decoder bisa</b>membaca kemungkinan kebutuhan kucingmu dari suara, badan, dan gejalanya. Aplikasi ini juga bisa kasih langkah pertama yang aman untuk dicoba di rumah, dan kasih tahu kapan kamu gak boleh menunggu.</div>
+          <div class="honest-item honest-no"><b>Kucing Decoder bukan</b>penerjemah kata per kata, bukan diagnosis, dan bukan pengganti pemeriksaan dokter hewan. Kalau hasil Cek Bahaya merah, bawa anabulmu ke dokter hewan.</div>
+        </div>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/catatan-penting-d.webp" width="1456" height="840"><img class="shot shot-r" data-zoom src="img/catatan-penting.webp" alt="Catatan Penting di dalam aplikasi: bukan diagnosis dan bukan pengganti dokter hewan" width="504" height="980" loading="lazy"></picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNTUK SIAPA -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Cocok kalau</h3>
+        <ul class="fitlist fit-yes">
+          <li>Kamu sayang banget sama anabulmu, tapi sering bingung dia sebenarnya maunya apa.</li>
+          <li>Kamu pernah panik tengah malam dan gak tahu harus nunggu atau langsung ke klinik.</li>
+          <li>Kamu sudah coba app penerjemah kucing, lalu kecewa karena hasilnya asal atau kaget kena tagihan langganan.</li>
+          <li>Kamu baru pelihara kucing dan semua meongnya masih terdengar sama.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Bukan untuk kamu kalau</h3>
+        <ul class="fitlist fit-no">
+          <li>Kamu cari terjemahan kata per kata. Itu belum ada, di aplikasi mana pun.</li>
+          <li>Kamu berharap aplikasi menggantikan dokter hewan saat kucingmu jelas sakit.</li>
+          <li>Kamu cari mainan untuk dimainkan anak sendirian tanpa kamu dampingi.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERBANDINGAN -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Kenapa bukan app penerjemah gratisan, atau Googling saja</h2>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>App penerjemah kucing</th>
+            <th>Googling artikel</th>
+            <th class="hl">Kucing Decoder</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Cara bayar</th><td>Gratis unduh, lalu langganan mingguan atau bulanan</td><td>Gratis</td><td class="hl">Sekali bayar, selamanya</td></tr>
+          <tr><th>Hasilnya</th><td>Kalimat lucu</td><td>Daftar 12 penyebab</td><td class="hl">3 kemungkinan plus langkah 5 menit</td></tr>
+          <tr><th>Sesuai kucingmu</th><td>Tidak</td><td>Tidak</td><td class="hl">Ya, dari profil dan kebiasaannya</td></tr>
+          <tr><th>Kapan ke dokter hewan</th><td>Tidak dibahas</td><td>Kamu simpulkan sendiri</td><td class="hl">Ada fitur Cek Bahaya</td></tr>
+          <tr><th>Baca bahasa tubuh</th><td>Jarang</td><td>Harus baca panjang</td><td class="hl">Ketuk atau foto, langsung ada hasil</td></tr>
+          <tr><th>Jam 2 pagi</th><td>Buka, dengar kalimat lucu</td><td>Scroll artikel panjang</td><td class="hl">Mode Malam, 2 tombol utama</td></tr>
+          <tr><th>Konteks lokal</th><td>Tidak</td><td>Kadang</td><td class="hl">Konteks khas rumah Indonesia</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Cerita dari yang sudah pakai</h2>
+      <p class="lead" style="margin-top:12px;"><span class="m-only">Geser untuk melihat cerita lainnya. </span>Nomor disensor untuk menjaga privasi.</p>
+    </div>
+    <div class="testi-grid">
+      <figure><img src="img/testi1.webp" alt="Screenshot WhatsApp dari pemilik Mochi, pengguna Kucing Decoder" width="392" height="812" loading="lazy"><figcaption>Mochi, meong kencang tiap jam 3 pagi. <i>Dengar Meongnya</i></figcaption></figure>
+      <figure><img src="img/testi2.webp" alt="Screenshot WhatsApp dari pemilik Una, pengguna Kucing Decoder" width="392" height="812" loading="lazy"><figcaption>Una, sembunyi dan gak mau makan. <i>Cek Bahaya</i></figcaption></figure>
+      <figure><img src="img/testi3.webp" alt="Screenshot WhatsApp dari pemilik Momo, pengguna Kucing Decoder" width="392" height="812" loading="lazy"><figcaption>Momo, dielus malah nyakar. <i>Baca Badannya</i></figcaption></figure>
+    </div>
+    <div class="testi-dots" id="testiDots" aria-hidden="true">
+      <button type="button" class="on" data-i="0" aria-label="Testimoni 1"></button>
+      <button type="button" data-i="1" aria-label="Testimoni 2"></button>
+      <button type="button" data-i="2" aria-label="Testimoni 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- PENAWARAN -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>App sejenis menagih Rp119.000, dan terus ditagih tiap bulan. Kucing Decoder Rp127.000 sekali. Selesai.</h2>
+      <p class="price-lead">Bulan kedua, kamu sudah lebih hemat. Di tahun pertama, hitungannya kurang dari Rp350 per hari. Setelah itu, gak ada tagihan apa-apa lagi.</p>
+    </div>
+    <div class="price-card">
+      <h3 class="center" style="margin-bottom:14px;">Yang kamu dapat begitu masuk</h3>
+      <ul class="getlist">
+        <li>Dengar Meongnya: rekam 5 detik atau pilih jenis bunyi, hasilnya 3 kemungkinan kebutuhan</li>
+        <li>Baca Badannya: lewat pilihan gambar atau foto, hasilnya aman dipegang atau biarkan dulu</li>
+        <li>Cek Bahaya: tahu seberapa darurat kondisi anabulmu</li>
+        <li>Cek Harian 20 detik dan Riwayat Pola Jam Meong</li>
+        <li>Kamus Suara Kucing: 12 bunyi khas</li>
+        <li>Protokol 7 Hari Perilaku untuk 3 masalah paling berulang</li>
+        <li>Ngobrol Iseng, Mode Malam, dan profil untuk lebih dari satu anabul</li>
+      </ul>
+
+      <div class="price-now">
+        <div class="amt">Rp127.000</div>
+        <div class="sub">Sekali bayar. Akses selamanya. Semua fitur langsung terbuka, tanpa paket basic atau premium.</div>
+      </div>
+
+      <div class="cta-block center">
+        <a class="btn" href="checkout.html">Ambil Akses Kucing Decoder → Rp127.000</a>
+        <p class="btn-note">Panduan Akses berisi kode masuk dikirim ke email yang kamu pakai saat order.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DARI BAYAR SAMPAI PAKAI -->
+<section class="sec-alt akses">
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Dari bayar sampai mulai, cuma tiga langkah.</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h4>Selesaikan pembayaran</h4>
+        <p>Bisa pakai QRIS, transfer bank, atau e-wallet.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h4>Cek email kamu</h4>
+        <p>Begitu pembayaran terkonfirmasi, kamu diarahkan ke halaman sukses Kucing Decoder, dan Panduan Akses berisi kode masuk dikirim ke email kamu. Kalau belum ada di kotak masuk, cek folder Spam atau Promosi.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h4>Ketik kode, kenalkan anabulmu</h4>
+        <p>Buka kucingdecoder.ai.studio, masukkan kode akses dari email, lalu isi profil anabul sekitar 1 menit. Kamu bisa langsung pakai malam ini.</p>
+      </div>
+    </div>
+    <div class="akses-shot">
+      <picture><source media="(min-width:860px)" srcset="img/masuk-kode-d.webp" width="1456" height="840"><img class="shot" data-zoom src="img/masuk-kode.webp" alt="Layar Masukkan kode akses Kucing Decoder" width="504" height="980" loading="lazy"></picture>
+    </div>
+    <p class="akses-foot">Tanpa bikin akun. Tanpa password.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="narrow">
+      <h2 class="center" style="margin-bottom:26px;">Pertanyaan yang sering masuk</h2>
+      <div class="faq">
+        <details><summary>Ini aplikasi yang harus di-install?</summary><div class="ans">Tidak. Kucing Decoder dibuka lewat browser di HP, tablet, atau laptop.</div></details>
+        <details><summary>Gimana cara masuk setelah bayar?</summary><div class="ans">Setelah pembayaran terkonfirmasi, kamu diarahkan ke halaman sukses Kucing Decoder, dan Panduan Akses berisi kode masuk dikirim ke email kamu. Buka kucingdecoder.ai.studio, ketik kodenya, lalu tap Masuk.</div></details>
+        <details><summary>Perlu bikin akun atau password?</summary><div class="ans">Tidak. Cukup kode akses. Kalau ganti HP atau ganti browser, masukkan kode yang sama.</div></details>
+        <details><summary>Kodenya ditolak terus.</summary><div class="ans">Ketik manual, jangan salin-tempel. Pakai huruf kecil semua, tanpa spasi di depan atau belakang.</div></details>
+        <details><summary>Hasilnya terjemahan yang pasti?</summary><div class="ans">Bukan. Hasilnya adalah kemungkinan kebutuhan yang paling masuk akal, berdasarkan suara, konteks, dan profil anabulmu. Makin rutin Cek Harian, makin tepat bacaannya.</div></details>
+        <details><summary>Bisa menggantikan dokter hewan?</summary><div class="ans">Tidak. Kucing Decoder membantu kamu memutuskan langkah berikutnya. Kalau hasil Cek Bahaya merah, segera bawa ke dokter hewan.</div></details>
+        <details><summary>Kucingku lebih dari satu, bisa?</summary><div class="ans">Bisa. Tiap kucing punya profil, catatan harian, dan riwayatnya sendiri.</div></details>
+        <details><summary>Kucing kampung juga bisa?</summary><div class="ans">Bisa. Profil anabul mencatat umur, status steril, aktivitas, dan makanannya. Kamus Suara Kucing juga memuat konteks khas rumah Indonesia.</div></details>
+        <details><summary>Tombol rekamnya gak jalan.</summary><div class="ans">Biasanya izin mikrofon belum diberikan. Saat browser bertanya, pilih Izinkan. Sambil menunggu, kamu tetap bisa memilih jenis bunyi secara manual.</div></details>
+        <details><summary>Kalau ganti HP, datanya ikut?</summary><div class="ans">Bisa. Simpan cadangan dulu dari menu nama anabul. Di HP baru, masuk dengan kode yang sama, lalu pulihkan dari file cadangan.</div></details>
+        <details><summary>Ada biaya bulanan?</summary><div class="ans">Tidak ada. Sekali bayar, semua fitur langsung terbuka.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PENUTUP -->
+<section class="sec-deep">
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Suatu malam, dia bakal meong lagi. Atau tiba-tiba diam di pojokan dan gak mau makan.</h2>
+      <p class="lead" style="margin-top:20px;">Malam itu kamu bisa buka Google dan baca 12 kemungkinan. Kamu bisa langsung panik ke klinik 24 jam. Atau kamu bisa tahu dalam 2 menit: dia butuh apa, apa yang bisa kamu coba sekarang, dan apakah ini bisa ditunggu sampai besok.</p>
+      <p style="font-size:21px;font-weight:800;color:#fff;margin-top:24px;">Kamu sudah sayang sama dia. Yang kurang cuma cara membacanya.</p>
+      <div class="cta-block">
+        <a class="btn" href="checkout.html">Mulai Baca Anabulku → Rp127.000</a>
+        <p class="btn-note">Sekali bayar. Tanpa langganan. Buka dari browser HP, tanpa install.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="logo">Kucing <em>Decoder</em></span>
+    <small>© 2026 Kucing Decoder. Semua hak dilindungi.</small>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="sp">
+    <b>Rp127.000</b>
+    <small>Sekali bayar, akses selamanya</small>
+  </div>
+  <a class="btn" href="checkout.html">Ambil Akses</a>
+</div>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Tampilan aplikasi diperbesar">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Tutup gambar">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9" stroke="#1C182F" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <div class="lb-inner"><img id="lbImg" src="" alt=""></div>
+</div>
+<script>
+(function(){
+  var bar=document.getElementById('stickyCta');
+  var hero=document.querySelector('.hero');
+  if(!bar||!hero)return;
+  document.body.classList.add('has-sticky');
+  function check(){bar.classList.toggle('on',hero.getBoundingClientRect().bottom<0);}
+  check();
+  window.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check);
+})();
+
+(function(){
+  var track=document.querySelector('.testi-grid');
+  var dots=document.getElementById('testiDots');
+  if(!track||!dots)return;
+  var slides=track.querySelectorAll('figure');
+  var btns=dots.querySelectorAll('button');
+  function active(){
+    var mid=track.scrollLeft+track.clientWidth/2,best=0,min=Infinity;
+    for(var i=0;i<slides.length;i++){
+      var c=slides[i].offsetLeft+slides[i].offsetWidth/2,d=Math.abs(c-mid);
+      if(d<min){min=d;best=i;}
+    }
+    for(var j=0;j<btns.length;j++)btns[j].classList.toggle('on',j===best);
+  }
+  var t;
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(active,60);},{passive:true});
+  for(var k=0;k<btns.length;k++){
+    btns[k].addEventListener('click',function(){
+      var el=slides[Number(this.getAttribute('data-i'))];
+      if(!el)return;
+      track.scrollTo({left:el.offsetLeft-(track.clientWidth-el.offsetWidth)/2,behavior:'smooth'});
+    });
+  }
+  active();
+})();
+
+(function(){
+  var lb=document.getElementById('lightbox'),img=document.getElementById('lbImg'),close=document.getElementById('lbClose');
+  var last=null;
+  function open(src,alt,wide){
+    img.src=src;img.alt=alt||'';
+    lb.classList.toggle('pan',wide&&window.innerWidth<860);
+    lb.classList.add('on');document.body.style.overflow='hidden';close.focus();
+  }
+  function shut(){lb.classList.remove('on','pan');img.src='';document.body.style.overflow='';if(last)last.focus();}
+  var zs=document.querySelectorAll('[data-zoom]');
+  for(var i=0;i<zs.length;i++){
+    zs[i].setAttribute('tabindex','0');
+    zs[i].setAttribute('role','button');
+    zs[i].addEventListener('click',function(){last=this;open(this.currentSrc||this.src,this.alt,this.naturalWidth>this.naturalHeight);});
+    zs[i].addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click();}});
+  }
+  close.addEventListener('click',shut);
+  lb.addEventListener('click',function(e){if(e.target===lb)shut();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('on'))shut();});
+})();
+</script>
+</body>
+</html>
