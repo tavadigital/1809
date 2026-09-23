@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detektif BB Anak | Anak Makan Lahap tapi Tetap Kurus? Cari Kebocoran Kalorinya</title>
+<meta name="description" content="Aplikasi di HP yang memeriksa kurva pertumbuhan WHO, catatan makan 3 hari, dan sinyal kesehatan anak, lalu menyusun rencana padat kalori 30 hari.">
+<meta property="og:title" content="Detektif BB Anak | Anak Makan Lahap tapi Tetap Kurus? Cari Kebocoran Kalorinya">
+<meta property="og:description" content="Aplikasi di HP yang memeriksa kurva pertumbuhan WHO, catatan makan 3 hari, dan sinyal kesehatan anak, lalu menyusun rencana padat kalori 30 hari.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#075985;
+  --teal-deep:#0C4A6E;
+  --teal-mid:#0284C7;
+  --teal-soft:#E0F2FE;
+  --amber:#F59E0B;
+  --amber-deep:#B45309;
+  --amber-soft:#FEF3C7;
+  --amber-ink:#082F49;
+  --green:#047857;
+  --green-soft:#D1FAE5;
+  --red:#BE123C;
+  --red-soft:#FFE4E6;
+  --bg:#F8FAFC;
+  --card:#FFFFFF;
+  --line:#E2E8F0;
+  --line-soft:#EEF2F6;
+  --ink:#0F172A;
+  --muted:#475569;
+  --muted-light:#7C8BA1;
+  --deep-soft:#BAE6FD;
+  --radius:14px;
+  --radius-lg:20px;
+  --maxw:1120px;
+  --maxw-text:680px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:17px;line-height:1.65;overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block;}
+a{color:inherit;}
+h1,h2,h3,h4{margin:0;line-height:1.22;letter-spacing:-0.02em;font-weight:800;color:var(--teal);}
+h1{font-size:clamp(27px,5.4vw,44px);}
+h2{font-size:clamp(23px,4vw,34px);}
+h3{font-size:clamp(19px,2.6vw,24px);}
+h4{font-size:17px;font-weight:700;}
+p{margin:0 0 1rem;}
+p:last-child{margin-bottom:0;}
+strong{font-weight:700;color:var(--teal);}
+
+/* layout */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+.narrow{max-width:var(--maxw-text);margin-left:auto;margin-right:auto;}
+section{padding:56px 0;}
+@media(min-width:768px){section{padding:76px 0;}}
+.sec-alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.sec-deep{background:var(--teal-deep);color:#fff;}
+.sec-deep h2,.sec-deep h3{color:#fff;}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--teal-mid);margin:0 0 10px;}
+.eyebrow-amber{color:var(--amber-deep);}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--muted);}
+.sec-deep .lead{color:#C7E3F5;}
+.center{text-align:center;}
+
+/* header */
+.site-head{background:var(--card);border-bottom:1px solid var(--line);padding:14px 0;position:relative;z-index:5;}
+.logo{font-size:19px;font-weight:800;letter-spacing:-0.03em;color:var(--teal);}
+.logo em{font-style:normal;color:var(--amber-deep);}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--amber);color:var(--amber-ink);text-decoration:none;
+  font-weight:800;font-size:17px;letter-spacing:-0.01em;
+  padding:17px 28px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:0 2px 0 var(--amber-deep);
+  transition:transform .12s ease,box-shadow .12s ease;
+  text-align:center;width:100%;
+}
+@media(min-width:560px){.btn{width:auto;font-size:18px;padding:18px 34px;}}
+.btn:hover{transform:translateY(-1px);box-shadow:0 3px 0 var(--amber-deep);}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--amber-deep);}
+.btn:focus-visible{outline:3px solid var(--teal);outline-offset:3px;}
+.sec-deep .btn:focus-visible{outline-color:#fff;}
+.btn-note{font-size:14.5px;color:var(--muted);margin-top:12px;}
+.sec-deep .btn-note{color:#A9CFE8;}
+.cta-block{margin-top:26px;}
+
+/* hero */
+.hero{background:var(--card);padding:28px 0 44px;border-bottom:1px solid var(--line);}
+.hero-grid{display:block;}
+.hero-img{margin:22px -20px 24px;}
+@media(min-width:900px){
+  .hero{padding:64px 0 72px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1fr 460px;
+    grid-template-areas:"hd img" "rest img";
+    column-gap:56px;align-items:center;
+  }
+  .hero-hd{grid-area:hd;align-self:end;}
+  .hero-rest{grid-area:rest;align-self:start;padding-top:18px;}
+  .hero-img{grid-area:img;margin:0;align-self:center;}
+  .hero-img img{border-radius:var(--radius-lg);}
+}
+.hero-bullets{list-style:none;padding:0;margin:22px 0 0;}
+.hero-bullets li{position:relative;padding-left:30px;margin-bottom:12px;font-size:16.5px;color:var(--ink);}
+.hero-bullets li::before{
+  content:"";position:absolute;left:0;top:9px;width:16px;height:16px;border-radius:50%;
+  background:var(--green-soft);border:2px solid var(--green);
+}
+.hero-facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:20px;font-size:14.5px;color:var(--muted);font-weight:600;}
+.hero-facts span{white-space:nowrap;}
+
+/* cards */
+.grid{display:grid;gap:18px;}
+@media(min-width:760px){.grid-3{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:640px){.grid-2{grid-template-columns:repeat(2,1fr);}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+.sec-alt .card{background:var(--bg);}
+.card-quote{font-size:18px;font-weight:800;color:var(--teal);margin:0 0 10px;line-height:1.35;}
+.card p{font-size:16px;color:var(--muted);}
+
+/* pemicu */
+.pemicu{border-left:4px solid var(--teal-mid);padding:4px 0 4px 18px;margin-bottom:20px;}
+.pemicu:nth-child(2){border-color:var(--amber);}
+.pemicu:nth-child(3){border-color:var(--green);}
+.pemicu:nth-child(4){border-color:var(--teal-deep);}
+.pemicu:nth-child(5){border-color:var(--amber-deep);}
+.pemicu h4{margin-bottom:4px;}
+.pemicu p{font-size:16px;color:var(--muted);margin:0;}
+
+/* steps */
+.step{display:grid;gap:20px;padding:28px 0;border-top:1px solid var(--line);}
+.step:first-of-type{border-top:none;}
+@media(min-width:800px){
+  .step{grid-template-columns:1fr 280px;gap:48px;align-items:center;}
+  .step.dimg{grid-template-columns:1fr 1.35fr;}
+  .step-img{order:2;}
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--teal);color:#fff;font-weight:800;font-size:16px;margin-bottom:12px;
+}
+.step-copy p{color:var(--muted);margin-top:10px;}
+.step-wide{display:block;}
+.step-wide .step-copy{max-width:var(--maxw-text);}
+.step-wide .step-img{margin-top:24px;}
+@media(min-width:800px){.step-wide .shot-m{max-width:980px;}}
+
+/* screenshot frames */
+.shot{border:1px solid var(--line);border-radius:12px;background:var(--card);box-shadow:0 1px 3px rgba(12,74,110,.06);}
+.shot-m{max-width:320px;margin-left:auto;margin-right:auto;}
+.shot-r{max-width:320px;width:100%;margin-left:auto;margin-right:auto;}
+@media(min-width:860px){.shot-r{max-width:100%;}}
+@media(min-width:800px){.step .shot-r{max-width:100%;}}
+.shot-d{max-width:980px;margin-left:auto;margin-right:auto;}
+[data-zoom]{cursor:zoom-in;}
+.m-only{display:inline;}
+@media(min-width:700px){.m-only{display:none;}}
+.zoom-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+@media(min-width:860px){.zoom-note{display:none;}}
+figure{margin:0;}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:8px;text-align:center;}
+
+/* feature rows */
+.feat{display:grid;gap:24px;padding:40px 0;border-top:1px solid var(--line);}
+@media(min-width:860px){
+  .feat{grid-template-columns:1fr 340px;gap:56px;align-items:center;}
+  .feat-img{order:2;}
+  .feat.flip{grid-template-columns:340px 1fr;}
+  .feat.flip .feat-img{order:1;}
+  .feat.flip .feat-copy{order:2;}
+  .feat.land{grid-template-columns:1fr 500px;}
+  .feat.dimg{grid-template-columns:1fr 1.35fr;}
+  .feat.dimg.flip{grid-template-columns:1.35fr 1fr;}
+}
+.feat-copy h3{margin-bottom:12px;}
+.feat-copy p{color:var(--muted);font-size:16.5px;}
+.feat-block{padding:40px 0;border-top:1px solid var(--line);}
+.feat-block .feat-copy{max-width:var(--maxw-text);}
+.feat-block .media{margin-top:26px;}
+
+/* duo: dua screenshot portrait */
+.duo{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.duo::-webkit-scrollbar{display:none;}
+.duo figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:700px){
+  .duo{display:grid;grid-template-columns:repeat(2,320px);justify-content:center;gap:28px;overflow:visible;padding:0;margin:0;}
+  .duo figure{max-width:none;}
+}
+@media(min-width:860px){
+  .duo{grid-template-columns:1fr 1fr;gap:24px;}
+  .duo-note{display:none;}
+}
+.duo-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+
+/* mix: satu screenshot lebar + satu portrait */
+.mix{display:grid;gap:22px;}
+.mix .m-port{max-width:320px;width:100%;margin:0 auto;}
+@media(min-width:860px){
+  .mix{grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+  .mix.rev{grid-template-columns:1fr 1fr;}
+  .mix .m-port{max-width:none;}
+  .mix.rev .m-wide{order:2;}
+  .mix.rev .m-port{order:1;}
+}
+
+/* timeline */
+.tl{list-style:none;padding:0;margin:0;}
+.tl li{position:relative;padding:0 0 26px 30px;border-left:2px solid rgba(255,255,255,.22);}
+.tl li:last-child{border-left-color:transparent;padding-bottom:0;}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--amber);}
+.tl strong{display:block;color:#fff;font-size:15px;letter-spacing:.02em;margin-bottom:3px;}
+.tl p{color:#C7E3F5;font-size:16.5px;margin:0;}
+
+/* fit lists */
+.fitlist{list-style:none;padding:0;margin:0;}
+.fitlist li{position:relative;padding-left:30px;margin-bottom:13px;font-size:16.5px;}
+.fitlist li::before{position:absolute;left:0;top:0;font-weight:800;font-size:17px;}
+.fit-yes li::before{content:"✓";color:var(--green);}
+.fit-no li::before{content:"✕";color:var(--red);}
+
+/* table */
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:15.5px;background:var(--card);}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+thead th{font-size:13px;font-weight:700;color:var(--muted);border-bottom:2px solid var(--line);}
+thead th.hl{color:var(--teal);}
+tbody td.hl{font-weight:700;color:var(--teal);background:var(--teal-soft);}
+tbody th{font-weight:600;color:var(--ink);width:26%;}
+
+/* testimoni */
+.testi-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.testi-grid::-webkit-scrollbar{display:none;}
+.testi-grid img{flex:0 0 78%;scroll-snap-align:center;}
+.testi-dots{display:flex;justify-content:center;gap:8px;margin-top:16px;}
+.testi-dots button{width:8px;height:8px;padding:0;border:none;border-radius:50%;background:var(--line);cursor:pointer;transition:background .2s ease,width .2s ease;}
+.testi-dots button.on{background:var(--teal);width:22px;border-radius:5px;}
+.testi-dots button:focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+@media(min-width:700px){
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;overflow:visible;padding:0;margin:0;}
+  .testi-grid img{flex:none;}
+  .testi-dots{display:none;}
+}
+.testi-grid img{width:100%;height:auto;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 1px 3px rgba(12,74,110,.06);}
+
+/* price */
+.price-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;max-width:620px;margin:0 auto;}
+@media(min-width:640px){.price-card{padding:36px;}}
+.val-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:15.5px;}
+.val-row span:last-child{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.val-total{display:flex;justify-content:space-between;gap:16px;padding:16px 0 0;font-weight:700;color:var(--teal);}
+.val-total s{color:var(--muted-light);font-weight:600;}
+.price-now{text-align:center;background:var(--amber-soft);border-radius:var(--radius);padding:22px;margin:24px 0 0;}
+.price-now .amt{font-size:clamp(36px,8vw,50px);font-weight:800;color:var(--teal);letter-spacing:-0.04em;line-height:1.1;}
+.price-now .sub{font-size:15px;color:var(--muted);margin-top:4px;}
+.price-divider{font-size:16px;color:var(--muted);text-align:center;margin-top:18px;padding-top:18px;border-top:1px solid var(--line-soft);}
+.price-divider b{display:block;color:var(--teal);margin-bottom:4px;}
+.price-note{font-size:14px;color:var(--muted-light);text-align:center;margin-top:14px;}
+
+/* akses */
+.akses .card{text-align:left;}
+.akses .card p{margin-top:8px;}
+.akses-foot{text-align:center;font-weight:700;color:var(--teal);margin-top:24px;}
+
+/* faq */
+.faq{border-top:1px solid var(--line);}
+.faq details{border-bottom:1px solid var(--line);}
+.faq summary{cursor:pointer;padding:18px 34px 18px 0;position:relative;font-weight:700;font-size:16.5px;color:var(--teal);list-style:none;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"";position:absolute;right:6px;top:26px;width:9px;height:9px;
+  border-right:2.5px solid var(--teal-mid);border-bottom:2.5px solid var(--teal-mid);
+  transform:rotate(45deg);transition:transform .18s ease;
+}
+.faq details[open] summary::after{transform:rotate(-135deg);top:28px;}
+.faq summary:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+.faq .ans{padding:0 0 20px;color:var(--muted);font-size:16.5px;}
+
+/* sticky bar */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:var(--card);border-top:1px solid var(--line);padding:10px 16px;
+  box-shadow:0 -3px 14px rgba(12,74,110,.09);
+  display:flex;align-items:center;gap:12px;
+  transform:translateY(110%);transition:transform .25s ease;
+}
+.sticky-cta.on{transform:translateY(0);}
+.sticky-cta .sp{flex:1;min-width:0;}
+.sticky-cta .sp b{display:block;font-size:17px;color:var(--teal);line-height:1.2;}
+.sticky-cta .sp small{font-size:12.5px;color:var(--muted);}
+.sticky-cta .btn{width:auto;padding:14px 20px;font-size:15.5px;flex-shrink:0;}
+@media(min-width:900px){.sticky-cta{display:none;}}
+body.has-sticky{padding-bottom:82px;}
+@media(min-width:900px){body.has-sticky{padding-bottom:0;}}
+
+/* footer */
+.site-foot{background:var(--card);border-top:1px solid var(--line);padding:30px 0;text-align:center;}
+.site-foot .logo{display:block;margin-bottom:6px;}
+.site-foot small{font-size:13.5px;color:var(--muted-light);}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(4,20,32,.92);display:none;align-items:center;justify-content:center;padding:56px 12px 20px;}
+.lb.on{display:flex;}
+.lb-inner{max-width:1100px;width:100%;max-height:100%;overflow:auto;-webkit-overflow-scrolling:touch;border-radius:10px;}
+.lb img{width:auto;max-width:100%;max-height:84vh;margin:0 auto;border-radius:10px;}
+.lb.pan .lb-inner{overflow:auto;}
+.lb.pan img{max-width:none;max-height:none;width:960px;}
+.lb-close{
+  position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;
+  background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.lb-close:focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+.lb-close svg{width:18px;height:18px;}
+
+
+/* trio: 3 screenshot (mobile geser, desktop 1 lebar + 2 berdampingan) */
+.trio{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.trio::-webkit-scrollbar{display:none;}
+.trio figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:860px){
+  .trio{display:grid;grid-template-columns:1fr 1fr;gap:24px;overflow:visible;padding:0;margin:0;align-items:start;}
+  .trio figure{max-width:none;}
+  .trio figure:first-child{grid-column:1 / -1;width:100%;max-width:760px;justify-self:center;}
+}
+.duo{align-items:start;}
+
+/* pair: satu portrait + satu lebar */
+.pair{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 20px 6px;margin:0 -20px;}
+.pair::-webkit-scrollbar{display:none;}
+.pair figure{flex:0 0 78%;max-width:320px;scroll-snap-align:center;}
+@media(min-width:700px){
+  .pair{display:grid;grid-template-columns:repeat(2,320px);justify-content:center;gap:28px;overflow:visible;padding:0;margin:0;}
+  .pair figure{max-width:none;}
+}
+@media(min-width:860px){
+  .pair{grid-template-columns:300px 1fr;gap:28px;align-items:start;}
+}
+.swipe-note{font-size:13px;color:var(--muted-light);text-align:center;margin-top:10px;}
+@media(min-width:860px){.swipe-note{display:none;}}
+
+/* batas jujur */
+.honest{display:grid;gap:14px;margin-top:22px;}
+.honest-item{border-radius:var(--radius);padding:18px 20px;font-size:16.5px;}
+.honest-yes{background:var(--green-soft);}
+.honest-no{background:var(--red-soft);}
+.honest-item b{display:block;margin-bottom:4px;}
+.honest-yes b{color:var(--green);}
+.honest-no b{color:var(--red);}
+
+/* checklist penawaran */
+.getlist{list-style:none;padding:0;margin:0;}
+.getlist li{position:relative;padding:11px 0 11px 30px;border-bottom:1px solid var(--line-soft);font-size:15.5px;}
+.getlist li::before{content:"✓";position:absolute;left:2px;top:10px;font-weight:800;color:var(--green);}
+.price-lead{font-size:17px;color:var(--muted);max-width:560px;margin:14px auto 0;}
+
+/* testimoni dengan caption */
+.testi-grid figure{flex:0 0 78%;scroll-snap-align:center;margin:0;}
+@media(min-width:700px){.testi-grid figure{flex:none;}}
+.testi-grid figcaption{font-size:14px;color:var(--muted);margin-top:10px;text-align:center;}
+.testi-grid figcaption i{font-style:normal;font-weight:700;color:var(--teal);}
+
+@media(min-width:860px){.shot-wide{max-width:980px;width:100%;}}
+.akses-shot{max-width:280px;margin:28px auto 0;}
+@media(min-width:860px){.akses-shot{max-width:760px;}}
+.small-feat{padding:40px 0;border-top:1px solid var(--line);}
+.small-feat h4{color:var(--teal);margin-bottom:6px;}
+.small-feat p{color:var(--muted);font-size:16.5px;}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+
+/* tambahan Detektif BB Anak */
+.btn{box-shadow:0 2px 0 #D97706;}
+.btn:hover{box-shadow:0 3px 0 #D97706;}
+.btn:active{box-shadow:0 1px 0 #D97706;}
+.kinds{margin:28px auto 0;max-width:980px;}
+.kinds .card h4{color:var(--teal);margin-bottom:6px;}
+.kinds .card p{font-size:15.5px;}
+.note-box{margin-top:28px;background:var(--teal-soft);border-left:4px solid var(--teal-mid);border-radius:0 var(--radius) var(--radius) 0;padding:18px 20px;font-size:16.5px;color:var(--ink);}
+.note-box b{display:block;color:var(--teal);margin-bottom:4px;}
+.pemicu:nth-child(1){border-color:var(--teal-mid);}
+.pemicu:nth-child(2){border-color:var(--amber);}
+.pemicu:nth-child(3){border-color:var(--green);}
+.pemicu:nth-child(4){border-color:var(--teal-deep);}
+.pemicu:nth-child(5){border-color:var(--amber-deep);}
+.small-note{font-size:14.5px;color:var(--muted-light);border-top:1px dashed var(--line);padding-top:12px;}
+.quote{margin:4px 0 16px;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);font-size:16px;color:var(--ink);font-style:italic;}
+@media(min-width:860px){
+  .pair.rev{grid-template-columns:1fr 300px;}
+  .trio.big-last figure:first-child{grid-column:auto;max-width:none;}
+  .trio.big-last figure:last-child{grid-column:1 / -1;width:100%;max-width:760px;justify-self:center;}
+}
+.m-only-block{display:block;}
+@media(min-width:700px){.m-only-block{display:none;}}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="logo">Detektif BB <em>Anak</em></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-hd">
+        <h1>Anak Makan Lahap tapi Tetap Kurus?! Jangan-Jangan Kalorinya Bocor! Cari Tahu Sekarang, Sebelum Garis KMS-nya Makin Turun.</h1>
+      </div>
+      <div class="hero-img">
+        <img src="img/hero-mockup.webp" alt="Detektif BB Anak, aplikasi cek kurva, kalori, dan kesehatan anak" width="980" height="1232" fetchpriority="high">
+      </div>
+      <div class="hero-rest">
+        <p class="lead">Detektif BB Anak adalah aplikasi di HP yang memeriksa kurva pertumbuhan, catatan makan, dan sinyal kesehatan anakmu, lalu menyusun rencana padat kalori 30 hari yang tinggal kamu jalankan.</p>
+        <ul class="hero-bullets">
+          <li>Garis KMS datar, atau angka timbangan di rumah gak gerak? Isi berat dan tinggi, langsung tahu anakmu kurus, pendek, atau memang mungil.</li>
+          <li>Piringnya habis tapi tetap kurus? Catat makannya 3 hari tanpa timbangan dapur, lalu keluar 5 kebocoran kalori terbesarnya.</li>
+          <li>Bingung besok masak apa? Menu 6 sesi sehari selama 30 hari, sudah menyesuaikan budget dan pantangan.</li>
+        </ul>
+        <div class="cta-block">
+          <a class="btn" href="checkout.html">Mulai Periksa Anakku → Rp127.000</a>
+          <p class="btn-note">Sekali bayar. Akses selamanya. Buka dari HP, tanpa install.</p>
+        </div>
+        <div class="hero-facts">
+          <span>Standar WHO</span>
+          <span>Usia 0 sampai 10 tahun</span>
+          <span>175 makanan Indonesia</span>
+          <span>Bisa lebih dari satu anak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:34px;">
+      <h2>Baca tiga ini. Kalau ada satu yang kamu alami bulan ini, kamu di tempat yang benar.</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="card-quote">“Dikejar ya, Bu.”</p>
+        <p>Piringnya habis, kadang malah minta nambah. Tapi di posyandu, garis di KMS-nya datar lagi. Kader cuma bilang itu sambil lanjut ke anak berikutnya. Dikejar pakai apa? Dia sudah makan banyak.</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">“Kok kurus banget, gak dikasih makan?”</p>
+        <p>Kumpul keluarga, semua cucu dijejerin. Mertua ngelus lengan anakmu lalu ngomong begitu, pelan tapi semua dengar. Kamu senyum dan jawab “makannya banyak kok, Bu.” Sampai rumah, kalimat itu masih nempel.</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">“Coba susu yang ini, Bun.”</p>
+        <p>Sudah ganti susu penambah berat badan. Sudah beli vitamin penambah nafsu makan. Sudah baca belasan saran di grup. Padahal nafsu makannya gak pernah masalah. Timbangannya tetap segitu.</p>
+      </div>
+    </div>
+    <p class="narrow lead center" style="margin-top:30px;">Tiga adegan ini kelihatan beda. Akarnya satu, dan bukan karena kamu kurang ngasih makan.</p>
+  </div>
+</section>
+
+<!-- REFRAME + MEKANISME -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>Piringnya habis. Kalorinya yang bocor.</h2>
+      <p style="margin-top:18px;">Anak kurus gak selalu kurang makan. Sering kali makannya banyak, tapi kalorinya hilang di tempat yang gak kelihatan. Susu yang diminum setengah jam sebelum makan. Kuah yang bikin kenyang duluan. Kerupuk yang ngisi perut tanpa ngisi kalori. Jarak makan yang terlalu rapat sampai dia gak pernah benar-benar lapar.</p>
+      <p>Dari luar semuanya kelihatan beres. Porsinya cukup, jadwalnya rutin. Kebocorannya baru kelihatan kalau makannya dicatat dan dihitung.</p>
+      <p>Ada satu hal lagi yang jarang dibahas: gak semua anak kecil itu kurus.</p>
+    </div>
+
+    <div class="grid grid-3 kinds">
+      <div class="card"><h4>Kurus</h4><p>Beratnya kurang untuk tingginya. Ini soal kalori, dan ini yang bisa dikejar.</p></div>
+      <div class="card"><h4>Pendek</h4><p>Tingginya kurang untuk usianya. Menambah porsi makan gak menjawab ini, dan ini perlu dievaluasi dokter anak.</p></div>
+      <div class="card"><h4>Kecil tapi seimbang</h4><p>Berat dan tingginya serasi. Badannya memang mungil, dan itu kabar baik.</p></div>
+    </div>
+
+    <div class="narrow">
+      <div class="note-box">
+        <b>Jujur dulu</b>
+        Detektif BB Anak bukan alat diagnosis dan bukan pengganti dokter anak. Yang dikerjakannya adalah memeriksa angka anakmu pakai standar pertumbuhan WHO, mencari di mana kalorinya bocor, dan memberi tahu terus terang kalau ada tanda yang perlu diperiksakan. Kalau hasilnya hijau, ya memang hijau. Kamu boleh lega.
+      </div>
+
+      <h3 style="margin-top:48px;">Lima detektif, satu alur.</h3>
+      <p style="margin-top:10px;color:var(--muted);">Detektif BB Anak memeriksa anakmu berurutan, dari yang paling dasar sampai rencana harian.</p>
+
+      <div style="margin-top:26px;">
+        <div class="pemicu"><h4>1. Detektif Kurva</h4><p>Membaca posisi berat dan tinggi anakmu di kurva WHO.</p></div>
+        <div class="pemicu"><h4>2. Detektif Sinyal</h4><p>Mengecek 15 tanda yang menunjukkan kapan perlu ke dokter anak dulu.</p></div>
+        <div class="pemicu"><h4>3. Detektif Kalori</h4><p>Menghitung makan 3 hari dan menemukan kebocorannya.</p></div>
+        <div class="pemicu"><h4>4. Rencana Padat Kalori</h4><p>Menyusun menu 30 hari yang menaikkan kalori tanpa menambah suapan.</p></div>
+        <div class="pemicu"><h4>5. Pantau BB</h4><p>Membaca apakah rencananya bekerja, bulan demi bulan.</p></div>
+      </div>
+
+      <p style="color:var(--muted);font-size:16px;">Sinyal sengaja diperiksa sebelum kalori. Kalau ada tanda yang perlu diperiksakan, kamu gak perlu menunggu 3 hari untuk tahu.</p>
+
+      <p style="margin-top:28px;font-size:20px;font-weight:800;color:var(--teal);margin-bottom:4px;">Berhenti nambah porsi. Mulai cari bocornya.</p>
+      <p style="color:var(--muted);">Tanpa paksa makan, tanpa drama di meja makan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTIP HASILNYA -->
+<section>
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Intip dulu hasilnya.</h2>
+      <p class="lead" style="margin-top:12px;">Ini yang kamu lihat di layar, dari hari pertama sampai bulan pertama.</p>
+    </div>
+
+    <div class="feat dimg" style="border-top:none;">
+      <div class="feat-copy">
+        <p class="eyebrow">Hari pertama, 2 menit</p>
+        <h3>Akhirnya ada yang bilang jelas: kurang apa.</h3>
+        <p style="margin-top:12px;">Isi berat dan tinggi, lalu keluar satu kalimat yang bisa kamu pahami. Kurus, pendek, atau memang mungil, lengkap dengan artinya buat anakmu. Dihitung pakai standar pertumbuhan WHO.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/kurva-hasil-d.webp" width="1026" height="868"><img class="shot shot-r" data-zoom src="img/kurva-hasil.webp" alt="Hasil kurva pertumbuhan WHO: beratnya kurang untuk tingginya" width="504" height="1086" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat-block">
+      <div class="feat-copy">
+        <p class="eyebrow eyebrow-amber">Hari ketiga</p>
+        <h3>Ketemu. Ini bocornya.</h3>
+        <p style="margin-top:12px;">Catat makannya 3 hari pakai takaran rumah, tanpa timbangan dapur, tanpa foto, tanpa hitung gram. Aplikasi menghitung berapa kalori yang kurang dan di mana hilangnya. Misalnya susu sebelum makan yang diam-diam mengambil jatah makan siangnya. Tiap kebocoran lengkap dengan cara menambalnya.</p>
+      </div>
+      <div class="media">
+        <picture><source media="(min-width:860px)" srcset="img/hasil-kebocoran-d.webp" width="1032" height="576"><img class="shot shot-r shot-wide" data-zoom src="img/hasil-kebocoran.webp" alt="Hasil evaluasi asupan: defisit kalori harian dan daftar kebocoran kalori beserta cara menambalnya" width="504" height="1086" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat flip dimg">
+      <div class="feat-copy">
+        <p class="eyebrow">Setiap pagi</p>
+        <h3>Menu hari ini sudah ada. Tinggal centang.</h3>
+        <p style="margin-top:12px;">Enam sesi makan, jamnya, dan targetnya, sudah menyesuaikan budget dan pantangan. Kalori naik, porsi tetap, jadi gak ada drama suap-suapan tambahan.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/hari-ini-d.webp" width="1392" height="868"><img class="shot shot-r" data-zoom src="img/hari-ini.webp" alt="Layar Hari Ini dengan menu 6 sesi, target kalori, dan ceklis per sesi" width="504" height="1086" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat dimg">
+      <div class="feat-copy">
+        <p class="eyebrow eyebrow-amber">Akhir bulan</p>
+        <h3>Naik atau belum? Kamu tahu, bukan nebak.</h3>
+        <p style="margin-top:12px;">Timbang, catat, dan aplikasi membacanya dengan batas minimal sesuai usia anakmu. Kalau dua kali berturut-turut belum naik sesuai target, aplikasi bilang terus terang: waktunya kontrol ke dokter anak.</p>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/pantau-grafik-d.webp" width="1392" height="868"><img class="shot shot-r" data-zoom src="img/pantau-grafik.webp" alt="Grafik Pantau BB dengan evaluasi kenaikan berat terhadap batas minimal" width="504" height="1086" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="feat flip dimg">
+      <div class="feat-copy">
+        <p class="eyebrow">Saat ada yang komentar</p>
+        <h3>Mertua komentar lagi. Jawabannya sudah siap, pakai angka.</h3>
+        <p style="margin-top:12px;">Pilih siapa yang berkomentar, dan aplikasi menyusun dua kalimat jawaban berisi data anakmu sendiri. Tinggal salin.</p>
+        <blockquote class="quote">“Berat Rafa naik 340 gram bulan ini, sedangkan batas minimalnya 150 gram, jadi masih di jalur yang benar. Terima kasih ya Bu sudah perhatian.”</blockquote>
+      </div>
+      <div class="feat-img">
+        <picture><source media="(min-width:860px)" srcset="img/jawaban-penenang-d.webp" width="1392" height="868"><img class="shot shot-r" data-zoom src="img/jawaban-penenang.webp" alt="Kartu Jawaban Penenang Komentar dengan jawaban siap salin" width="504" height="1086" loading="lazy"></picture>
+      </div>
+    </div>
+
+    <div class="narrow center" style="margin-top:34px;">
+      <p style="color:var(--muted);">Di dalamnya masih ada Detektif Sinyal untuk tahu kapan perlu ke dokter, Simulator What-If, Rapor Bulanan yang siap dibawa saat kontrol, dan profil untuk lebih dari satu anak.</p>
+      <div class="cta-block">
+        <a class="btn" href="checkout.html">Mulai Periksa Anakku → Rp127.000</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec-deep">
+  <div class="wrap">
+    <div class="narrow">
+      <h2>30 hari. Kalori naik, porsi tetap.</h2>
+      <ul class="tl" style="margin-top:28px;">
+        <li><strong>Minggu 1: Tambal kebocoran.</strong><p>Satu sendok teh minyak, mentega, atau santan di tiap makan utama. Susu dan minuman manis pindah ke setelah makan.</p></li>
+        <li><strong>Minggu 2: Tambah yang padat.</strong><p>Satu butir telur per hari. Satu snack pengganjal diganti roti keju atau pisang selai kacang.</p></li>
+        <li><strong>Minggu 3: Perkuat lauk.</strong><p>Protein hewani kedua di makan siang atau malam. Sayur dimasak bersantan atau ditumis.</p></li>
+        <li><strong>Minggu 4: Satu sesi tambahan.</strong><p>Snack padat di sore hari, seperti puding susu, smoothie pisang, atau bubur kacang hijau.</p></li>
+      </ul>
+      <p style="margin-top:26px;color:#fff;font-weight:700;font-size:17.5px;">Kenaikannya bertahap, maksimal 20% per minggu. Tujuannya satu: kalori masuk tanpa perang di meja makan.</p>
+      <p style="color:var(--deep-soft);font-size:15.5px;">Tiap anak punya ritmenya sendiri. Yang menentukan bukan seberapa banyak kamu menyuapi, tapi seberapa konsisten kebocorannya ditambal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- UNTUK SIAPA -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Cocok kalau</h3>
+        <ul class="fitlist fit-yes">
+          <li>Anakmu usia 0 sampai 10 tahun, makannya lahap, tapi beratnya gak ikut naik.</li>
+          <li>Kamu sudah coba ganti susu, vitamin nafsu makan, atau saran dari grup, dan hasilnya belum kelihatan.</li>
+          <li>Kamu ingin tahu kenapa, bukan cuma disuruh “dikejar”.</li>
+          <li>Kamu siap mencatat makan anak selama 3 hari dengan jujur.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;">Bukan untuk kamu kalau</h3>
+        <ul class="fitlist fit-no">
+          <li>Kamu cari obat atau suplemen penggemuk instan.</li>
+          <li>Kamu berharap berat anak naik 2 kilo dalam seminggu.</li>
+          <li>Anakmu sedang sakit atau beratnya turun drastis. Ke dokter anak dulu, aplikasi ini bisa dipakai setelahnya.</li>
+          <li>Masalah utamamu anak menolak makan. Aplikasi ini dirancang untuk anak yang mau makan tapi beratnya gak naik.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERBANDINGAN -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Kenapa aplikasi, bukan ebook.</h2>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Ebook / artikel</th>
+            <th>Tanya di grup</th>
+            <th class="hl">Detektif BB Anak</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th>Tahu kurus, pendek, atau mungil</th><td>Baca tabel sendiri</td><td>Tergantung yang jawab</td><td class="hl">Dihitung otomatis, standar WHO</td></tr>
+          <tr><th>Kalori harian anakmu</th><td>Hitung manual</td><td>Tidak ada</td><td class="hl">Dari catatan 3 hari</td></tr>
+          <tr><th>Kalorinya bocor di mana</th><td>Teori umum</td><td>Tebakan</td><td class="hl">5 kebocoran teratas anakmu</td></tr>
+          <tr><th>Besok pagi masak apa</th><td>Contoh menu umum</td><td>Resep acak</td><td class="hl">Menu 6 sesi sesuai budget dan pantangan</td></tr>
+          <tr><th>Rencananya jalan atau tidak</th><td>Pakai perasaan</td><td>Pakai perasaan</td><td class="hl">Pantau BB dengan batas minimal</td></tr>
+          <tr><th>Kapan harus ke dokter</th><td>Dibahas sekilas</td><td>Beda-beda jawabannya</td><td class="hl">Sinyal dan alarm otomatis</td></tr>
+          <tr><th>Menjawab komentar keluarga</th><td>Tidak ada</td><td>Tidak ada</td><td class="hl">Kartu Jawaban berisi data anakmu</td></tr>
+          <tr><th>Menyebut nama anakmu</th><td>Tidak</td><td>Tidak</td><td class="hl">Di setiap hasil</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONI: PLACEHOLDER UNTUK PREVIEW INTERNAL
+     bb-testi-1/2/3.webp masih chat contoh, BUKAN testimoni asli.
+     Ganti ketiga file di img/ dengan testimoni asli (nomor disensor)
+     sebelum sales page ini dipublikasikan.
+     ============================================================ -->
+<section class="sec-alt">
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Cerita dari ibu yang sudah menjalani.</h2>
+      <p class="lead m-only-block" style="margin-top:12px;">Geser untuk melihat cerita lainnya.</p>
+    </div>
+    <div class="testi-grid">
+      <img src="img/bb-testi-1.webp" alt="Screenshot WhatsApp dari ibu pengguna Detektif BB Anak" width="392" height="812" loading="lazy">
+      <img src="img/bb-testi-2.webp" alt="Screenshot WhatsApp dari ibu pengguna Detektif BB Anak" width="392" height="812" loading="lazy">
+      <img src="img/bb-testi-3.webp" alt="Screenshot WhatsApp dari ibu pengguna Detektif BB Anak" width="392" height="812" loading="lazy">
+    </div>
+    <div class="testi-dots" id="testiDots" aria-hidden="true">
+      <button type="button" class="on" data-i="0" aria-label="Testimoni 1"></button>
+      <button type="button" data-i="1" aria-label="Testimoni 2"></button>
+      <button type="button" data-i="2" aria-label="Testimoni 3"></button>
+    </div>
+  </div>
+</section>
+<!-- /TESTIMONI PLACEHOLDER -->
+
+<!-- HARGA -->
+<section>
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Kurang lebih seharga sekaleng susu pertumbuhan, untuk 30 hari mencari dan menambal kebocoran kalori anakmu.</h2>
+    </div>
+    <div class="price-card">
+      <h3 class="center" style="margin-bottom:20px;">Yang kamu dapat begitu masuk</h3>
+      <div class="val-row"><span>Detektif Kurva dengan standar WHO</span><span>Rp80.000</span></div>
+      <div class="val-row"><span>Detektif Sinyal 15 pertanyaan</span><span>Rp50.000</span></div>
+      <div class="val-row"><span>Detektif Kalori 3 hari dan 5 Kebocoran Teratas</span><span>Rp90.000</span></div>
+      <div class="val-row"><span>Rencana Padat Kalori 30 Hari dan layar Hari Ini</span><span>Rp100.000</span></div>
+      <div class="val-row"><span>Pantau BB dan Simulator What-If</span><span>Rp60.000</span></div>
+      <div class="val-row"><span>Rapor Bulanan dan Kartu Kurva siap cetak</span><span>Rp47.000</span></div>
+      <div class="val-row"><span>Kartu Jawaban Penenang</span><span>Rp40.000</span></div>
+      <div class="val-row"><span>Profil multi-anak, riwayat, pengingat, cadangan data</span><span>Rp30.000</span></div>
+      <div class="val-total"><span>Total nilai wajar</span><span><s>Rp497.000</s></span></div>
+
+      <div class="price-now">
+        <div style="font-size:15px;color:var(--muted);font-weight:600;">Harga hari ini</div>
+        <div class="amt">Rp127.000</div>
+        <div class="sub">Sekali bayar. Akses selamanya. Semua fitur terbuka, tanpa paket basic dan premium.</div>
+      </div>
+
+      <p class="price-divider"><b>Rp127.000 untuk 180 sesi makan.</b>30 hari dikali 6 sesi, hitungannya sekitar Rp700 per sesi makan yang gak perlu kamu tebak lagi. Menunya mungkin nanti kamu hafal sendiri, tapi cara menambal kebocorannya kamu pakai sampai dia besar.</p>
+
+      <div class="cta-block center">
+        <a class="btn" href="checkout.html">Ambil Akses Detektif BB Anak → Rp127.000</a>
+        <p class="btn-note">Panduan Akses berisi kode dikirim ke email yang kamu pakai saat order.</p>
+      </div>
+
+      <p class="price-note">Rp127.000 adalah harga perkenalan batch awal. Harga akan naik seiring penambahan fitur.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARA DAPAT AKSES -->
+<section class="sec-alt akses">
+  <div class="wrap">
+    <div class="narrow center" style="margin-bottom:28px;">
+      <h2>Dari bayar sampai mulai, cuma tiga langkah.</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h4>Selesaikan pembayaran</h4>
+        <p>Bisa pakai QRIS, transfer bank, atau e-wallet.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h4>Buka Panduan Akses</h4>
+        <p>Begitu pembayaran terkonfirmasi, kamu diarahkan ke halaman sukses, dan Panduan Akses (PDF) berisi kode akses dikirim ke emailmu. Kalau belum muncul di kotak masuk, cek folder Spam atau Promosi.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h4>Tempel kode, lalu mulai</h4>
+        <p>Buka aplikasinya, tempel kode dari PDF, kenalkan anakmu, dan pemeriksaan pertama langsung jalan.</p>
+      </div>
+    </div>
+    <p class="akses-foot">Tanpa bikin akun, tanpa password.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="narrow">
+      <h2 class="center" style="margin-bottom:26px;">Pertanyaan yang sering masuk</h2>
+      <div class="faq">
+        <details><summary>Ini aplikasi yang harus di-install?</summary><div class="ans">Tidak. Detektif BB Anak dibuka lewat browser di HP, tablet, atau laptop. Supaya lebih cepat dibuka, kamu bisa menyimpannya ke layar utama HP seperti aplikasi biasa.</div></details>
+        <details><summary>Bagaimana cara masuk setelah bayar?</summary><div class="ans">Begitu pembayaran terkonfirmasi, Panduan Akses (PDF) dikirim ke email yang kamu isi saat order. Di dalamnya ada kode akses dan langkah singkat cara masuk.</div></details>
+        <details><summary>Kodenya harus diketik persis?</summary><div class="ans">Tidak perlu. Salin langsung dari PDF lalu tempel. Huruf kecil, spasi, atau tanda hubung yang ikut tersalin tetap diterima.</div></details>
+        <details><summary>Perlu timbangan dapur?</summary><div class="ans">Tidak. Makanan dicatat dalam takaran rumah seperti centong, butir, atau potong. Yang kamu butuhkan cuma timbangan badan untuk menimbang anak, di rumah atau di posyandu.</div></details>
+        <details><summary>Anakku usia berapa yang cocok?</summary><div class="ans">0 sampai 10 tahun. Hitungannya menyesuaikan usia, termasuk cara ukur panjang untuk anak di bawah 2 tahun.</div></details>
+        <details><summary>Anakku takut stunting. Ini bisa bantu?</summary><div class="ans">Detektif Kurva mengecek tinggi anak terhadap usianya pakai standar WHO, jadi kamu tahu apakah tingginya ikut tertinggal atau cuma beratnya. Kalau tingginya yang tertinggal, aplikasi akan bilang terus terang bahwa ini perlu dievaluasi dokter anak, bukan cuma dikejar dengan porsi.</div></details>
+        <details><summary>Anakku masih menyusu. Bisa?</summary><div class="ans">Bisa. Saat menyusun rencana, aplikasi menanyakan apakah anak masih menyusu dan menyesuaikan jadwalnya.</div></details>
+        <details><summary>Anakku alergi atau ada pantangan?</summary><div class="ans">Pilih pantangannya di awal, dan menu 30 hari disusun hanya dari makanan yang lolos.</div></details>
+        <details><summary>Yang masak ART, atau lebih sering beli jadi?</summary><div class="ans">Bisa. Pilih siapa yang masak saat menyusun rencana, dan menunya menyesuaikan.</div></details>
+        <details><summary>Anakku lebih dari satu, bisa?</summary><div class="ans">Bisa. Tiap anak punya profil, riwayat, dan rencananya sendiri dalam satu akses.</div></details>
+        <details><summary>Kalau pindah HP, datanya ikut?</summary><div class="ans">Bisa. Unduh file cadangan dari menu Profil, lalu di HP baru masuk dengan kode yang sama dan pulihkan dari cadangan.</div></details>
+        <details><summary>Data anakku aman?</summary><div class="ans">Nama anak, berat, tinggi, dan catatan makan hanya tersimpan di HP-mu. Tidak dikirim ke server, tidak ada iklan, dan tidak ada pelacakan pihak ketiga.</div></details>
+        <details><summary>Setelah 30 hari, selesai?</summary><div class="ans">Tidak. Aplikasi mengajak evaluasi: ukur ulang, bandingkan dengan target, lalu susun siklus berikutnya. Aksesnya tetap selamanya.</div></details>
+        <details><summary>Butuh kuota besar?</summary><div class="ans">Tidak. Isinya hanya teks, angka, dan grafik ringan, dan setelah terbuka tetap bisa dipakai walau sinyal hilang.</div></details>
+        <details><summary>Ini pengganti dokter anak?</summary><div class="ans">Bukan. Detektif BB Anak membantu kamu memantau dan menyusun makan di rumah, sekaligus memberi tahu kapan perlu ke dokter anak. Rapor Bulanan-nya malah disusun untuk dibawa saat kontrol.</div></details>
+        <details><summary>Ada biaya bulanan?</summary><div class="ans">Tidak ada. Sekali bayar, semua fitur langsung terbuka.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="sec-deep">
+  <div class="wrap">
+    <div class="narrow center">
+      <h2>Suatu hari kamu buka KMS-nya, dan garisnya naik.</h2>
+      <p class="lead" style="margin-top:20px;">Di hari itu, kamu gak perlu jelasin apa-apa ke siapa pun. Angkanya yang bicara.</p>
+      <p class="lead">Kamu sudah nambah porsi. Sudah ganti susu. Sudah coba vitamin. Bukan karena kamu kurang berusaha. Selama ini yang ditambah porsinya, padahal yang bocor kalorinya.</p>
+      <p style="font-size:21px;font-weight:800;color:#fff;margin-top:24px;">Jam makan berikutnya tinggal beberapa jam lagi.</p>
+      <div class="cta-block">
+        <a class="btn" href="checkout.html">Mulai Periksa Anakku → Rp127.000</a>
+        <p class="btn-note">Sekali bayar. Akses selamanya. Buka dari HP, tanpa install.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="logo">Detektif BB <em>Anak</em></span>
+    <small>© 2026 Detektif BB Anak. Semua hak dilindungi.</small>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="sp">
+    <b>Rp127.000</b>
+    <small>Sekali bayar, akses selamanya</small>
+  </div>
+  <a class="btn" href="checkout.html">Ambil Akses</a>
+</div>
+
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Tampilan aplikasi diperbesar">
+  <button type="button" class="lb-close" id="lbClose" aria-label="Tutup gambar">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 5.5l9 9M14.5 5.5l-9 9" stroke="#0F172A" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <div class="lb-inner"><img id="lbImg" src="" alt=""></div>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('stickyCta');
+  var hero=document.querySelector('.hero');
+  if(!bar||!hero)return;
+  document.body.classList.add('has-sticky');
+  function check(){bar.classList.toggle('on',hero.getBoundingClientRect().bottom<0);}
+  check();
+  window.addEventListener('scroll',check,{passive:true});
+  window.addEventListener('resize',check);
+})();
+
+(function(){
+  var track=document.querySelector('.testi-grid');
+  var dots=document.getElementById('testiDots');
+  if(!track||!dots)return;
+  var slides=track.querySelectorAll('img');
+  var btns=dots.querySelectorAll('button');
+  function active(){
+    var mid=track.scrollLeft+track.clientWidth/2,best=0,min=Infinity;
+    for(var i=0;i<slides.length;i++){
+      var c=slides[i].offsetLeft+slides[i].offsetWidth/2,d=Math.abs(c-mid);
+      if(d<min){min=d;best=i;}
+    }
+    for(var j=0;j<btns.length;j++)btns[j].classList.toggle('on',j===best);
+  }
+  var t;
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(active,60);},{passive:true});
+  for(var k=0;k<btns.length;k++){
+    btns[k].addEventListener('click',function(){
+      var el=slides[Number(this.getAttribute('data-i'))];
+      if(!el)return;
+      track.scrollTo({left:el.offsetLeft-(track.clientWidth-el.offsetWidth)/2,behavior:'smooth'});
+    });
+  }
+  active();
+})();
+
+(function(){
+  var lb=document.getElementById('lightbox'),img=document.getElementById('lbImg'),close=document.getElementById('lbClose');
+  var last=null;
+  function open(src,alt,wide){
+    img.src=src;img.alt=alt||'';
+    lb.classList.toggle('pan',wide&&window.innerWidth<860);
+    lb.classList.add('on');document.body.style.overflow='hidden';close.focus();
+  }
+  function shut(){lb.classList.remove('on','pan');img.src='';document.body.style.overflow='';if(last)last.focus();}
+  var zs=document.querySelectorAll('[data-zoom]');
+  for(var i=0;i<zs.length;i++){
+    zs[i].setAttribute('tabindex','0');
+    zs[i].setAttribute('role','button');
+    zs[i].addEventListener('click',function(){last=this;open(this.currentSrc||this.src,this.alt,this.naturalWidth>this.naturalHeight);});
+    zs[i].addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click();}});
+  }
+  close.addEventListener('click',shut);
+  lb.addEventListener('click',function(e){if(e.target===lb)shut();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('on'))shut();});
+})();
+</script>
+</body>
+</html>
